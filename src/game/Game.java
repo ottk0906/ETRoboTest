@@ -1,5 +1,7 @@
 package game;
 
+import body.control.Control;
+import body.measure.Measure;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
@@ -11,6 +13,11 @@ import game.guard.GuardTouch;
  *
  */
 public class Game {
+
+	private Measure measure;
+	private Game game;
+	private Control control;
+
     /** タスク呼出回数 */
 	/*private int count = 0;*/
 
@@ -46,7 +53,9 @@ public class Game {
             if (state instanceof StateEnd) {
                 isOver = true;
             } else {
+            	measure.update();
                 state.doActivity(this);
+                control.run();
             }
         }
     }

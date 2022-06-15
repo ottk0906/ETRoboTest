@@ -2,9 +2,9 @@ package task;
 
 import java.util.concurrent.CountDownLatch;
 
+import body.control.Control;
 import body.measure.Measure;
 import game.Game;
-import body.control.Control;
 import lejos.hardware.Button;
 
 /**
@@ -13,10 +13,10 @@ import lejos.hardware.Button;
  *
  */
 public class GameTask extends Thread {
-    
+
     /** ほかのスレッドで実行中の操作セットが完了するまで、1つ以上のスレッドを待機可能にする同期化支援機能 */
     private CountDownLatch countDownLatch;
-    
+
     /** 計測　*/
     Measure measure;
     /** 競技 */
@@ -37,7 +37,15 @@ public class GameTask extends Thread {
         this.game = game;
         this.control = control;
     }
-    
+
+    /**
+     * コンストラクタ
+     * @param countDownLatch　同期化支援機能
+     */
+    public GameTask(CountDownLatch countDownLatch) {
+    	this.countDownLatch = countDownLatch;
+    }
+
     /**
      * 実行する
      */
@@ -46,9 +54,9 @@ public class GameTask extends Thread {
         if(Button.ESCAPE.isDown() || game.isOver()){
             countDownLatch.countDown();
         }
-        measure.update();
+		/*measure.update();*/
         game.run();
-        control.run();
+		/*control.run();*/
     }
 
 }
