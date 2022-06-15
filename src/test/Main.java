@@ -7,7 +7,6 @@ import task.TaskManager;
  * @author 後藤 聡文
  *
  */
-
 public class Main {
 
     public static void main(String[] args) {

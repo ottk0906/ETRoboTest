@@ -19,7 +19,7 @@ import lejos.hardware.lcd.LCD;
 public class Log {
     /** 競技 */
     Game game;
-    
+
     /** ログデータリスト */
     private List<LogData> logList;
 
@@ -44,9 +44,11 @@ public class Log {
      */
     private void add() {
         logList.add(
-                new LogData(game.getCount(), game.toString(),
+                /*new LogData(game.getCount(), game.toString(),
                         Body.measure.getHue(), Body.measure.getSaturation(), Body.measure.getValue(),
-                        Body.measure.getLeftRotationSpeed(), Body.measure.getRightRotationSpeed()));
+                        Body.measure.getLeftRotationSpeed(), Body.measure.getRightRotationSpeed()));*/
+        		new LogData(game.toString(),
+        				Body.measure.getValue()));
     }
 
     /**

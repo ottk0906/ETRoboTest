@@ -20,7 +20,25 @@ public class LogData {
     private float leftRotationSpeed;
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
-    
+
+
+    public LogData(String statusName, float value) {
+    	this.statusName = this.statusName;
+    	this.value = value;
+    }
+
+    /**
+     * コンストラクタ
+     * @param count
+     * @param statusName
+     * @param value
+     */
+    public LogData(int count, String statusName, float value) {
+    	this.count = count;
+    	this.statusName = statusName;
+    	this.value = value;
+    }
+
     /**
      * コンストラクタ
      * @param count タスクの呼び出し回数
@@ -62,7 +80,7 @@ public class LogData {
         sb.append(",");
         sb.append(rightRotationSpeed);
         sb.append("\r\n");
-        
+
         return sb.toString();
     }
 }
