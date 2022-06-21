@@ -17,20 +17,20 @@ import log.Log;
  *
  */
 public class TaskManager {
-    
+
     // 競技タスク
     private GameTask gameTask;
     Game game;
     //　ログタスク
     private LogTask logTask;
     Log log;
-    
+
     // スケジューラ
     private ScheduledExecutorService scheduler;
     private ScheduledFuture<?> futureGame;
     private ScheduledFuture<?> futureLog;
     private CountDownLatch countDownLatch;
-    
+
     /**
      * コンストラクタ
      */
@@ -53,15 +53,15 @@ public class TaskManager {
         // 初期化完了
         Beep.ring();
     }
-    
+
     /**
      * タスクのスケジューリング
      */
     public void schedule(){
-        futureGame = scheduler.scheduleAtFixedRate(gameTask, 0, 10, TimeUnit.MILLISECONDS);
+        futureGame = scheduler.scheduleAtFixedRate(gameTask, 0, 30, TimeUnit.MILLISECONDS);
         futureLog = scheduler.scheduleAtFixedRate(logTask, 0, 500, TimeUnit.MILLISECONDS);
     }
-    
+
     /**
      * 競技タスクが終了するまで待つ
      */
@@ -69,10 +69,10 @@ public class TaskManager {
         try{
             countDownLatch.await();
         }catch(InterruptedException e){
-            
+
         }
     }
-    
+
     /**
      * タスクの実行の取り消しとスケジューラのシャットダウン
      */
@@ -85,5 +85,5 @@ public class TaskManager {
         }
         scheduler.shutdownNow();
         log.write();
-    }    
+    }
 }

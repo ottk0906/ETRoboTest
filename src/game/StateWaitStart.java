@@ -23,7 +23,8 @@ public class StateWaitStart extends State {
      */
     @Override
     public void changeState(Game game) {
-        game.changeState(this, StateRun.getInstance());
+		/*game.changeState(this, StateRun.getInstance());*/
+    	game.changeState(this, StateAcquisitionColor.getInstance());
     }
 
     /**
