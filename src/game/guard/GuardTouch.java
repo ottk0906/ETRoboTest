@@ -8,7 +8,7 @@ import body.Body;
  *
  */
 public class GuardTouch extends Guard{
-    
+
     /**
      * 判定する
      * @return タッチセンサが押された場合はtrue、押されていない場合はfalse
