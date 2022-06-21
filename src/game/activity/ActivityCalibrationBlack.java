@@ -8,20 +8,19 @@ import body.Body;
  *
  */
 public class ActivityCalibrationBlack extends Activity{
-    
+
     /**
      * コンストラクタ
      */
     public ActivityCalibrationBlack(){
 
     }
-    
+
     /**
      * 継続動作を実行する
      */
     @Override
     public void doActivity(){
-
     }
 
     /**

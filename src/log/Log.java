@@ -19,7 +19,8 @@ import lejos.hardware.lcd.LCD;
 public class Log {
     /** 競技 */
     Game game;
-    
+    int i;
+
     /** ログデータリスト */
     private List<LogData> logList;
 
@@ -35,8 +36,8 @@ public class Log {
      *　実行する
      */
     public void run() {
-        draw();
-        add();
+		/*draw();*/
+		/*add();*/
     }
 
     /**

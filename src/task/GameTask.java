@@ -2,10 +2,11 @@ package task;
 
 import java.util.concurrent.CountDownLatch;
 
+import body.control.Control;
 import body.measure.Measure;
 import game.Game;
-import body.control.Control;
 import lejos.hardware.Button;
+import lejos.hardware.lcd.LCD;
 
 /**
  * 競技タスククラス
@@ -13,10 +14,10 @@ import lejos.hardware.Button;
  *
  */
 public class GameTask extends Thread {
-    
+
     /** ほかのスレッドで実行中の操作セットが完了するまで、1つ以上のスレッドを待機可能にする同期化支援機能 */
     private CountDownLatch countDownLatch;
-    
+
     /** 計測　*/
     Measure measure;
     /** 競技 */
@@ -37,7 +38,7 @@ public class GameTask extends Thread {
         this.game = game;
         this.control = control;
     }
-    
+
     /**
      * 実行する
      */
@@ -46,9 +47,24 @@ public class GameTask extends Thread {
         if(Button.ESCAPE.isDown() || game.isOver()){
             countDownLatch.countDown();
         }
+        try {
+        LCD.drawString("GT1", 0, 7);
         measure.update();
+        }catch(Exception e){
+        	LCD.drawString("GTe1", 0, 7);
+        }
+        try {
+        LCD.drawString("GT2", 0, 7);
         game.run();
-        control.run();
+        }catch(Exception e){
+        	LCD.drawString("GTe2", 0, 7);
+        }
+        try {
+        LCD.drawString("GT3", 0, 7);
+			control.run();
+        }catch(Exception e) {
+        	LCD.drawString("GTe3", 0, 7);
+        }
     }
 
 }

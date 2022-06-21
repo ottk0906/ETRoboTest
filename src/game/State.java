@@ -1,8 +1,10 @@
 package game;
 
 import java.util.ArrayList;
+
 import game.activity.Activity;
 import game.guard.Guard;
+import lejos.hardware.lcd.LCD;
 import task.Beep;
 
 /**
@@ -57,7 +59,15 @@ public abstract class State {
      * @param game 競技
      */
     public void doActivity(Game game) {
-        if (guardList.get(index).judge()) {
+    	boolean b = false;
+    	try {
+    		b = guardList.get(index).judge();
+    	}catch(ArrayIndexOutOfBoundsException e) {
+    		LCD.drawString("SdbeO", 0, 7);
+    	}catch(Exception e) {
+    		LCD.drawString("Sdbe1", 0, 7);
+    	}
+        if (b) {
             index++;
             if(index >= guardList.size()){
                 changeState(game);
@@ -65,7 +75,11 @@ public abstract class State {
                 Beep.ring();
             }
         } else {
-            activityList.get(index).doActivity();
+            try{
+            	activityList.get(index).doActivity();
+            }catch(Exception e){
+            	LCD.drawString("Se1", 0, 7);
+            }
         }
     }
 
@@ -75,7 +89,7 @@ public abstract class State {
      * UMLステートマシン図のexitアクション
      */
     public void exitAction() {
-        activityList.get(index-1).exitAction();        
+        activityList.get(index-1).exitAction();
     }
 
     /**
@@ -91,7 +105,7 @@ public abstract class State {
     public int getIndex() {
         return index;
     }
-    
+
     /**
      * リストのサイズを取得する
      * @return
@@ -111,7 +125,7 @@ public abstract class State {
         sb.append(getIndex() + 1);
         sb.append("/");
         sb.append(getSize());
-        
+
         return sb.toString();
     }
 }
