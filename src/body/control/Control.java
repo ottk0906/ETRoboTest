@@ -25,11 +25,19 @@ public class Control {
 	public void run() {
 		controlWheel.run();
 	}
-
+/**
+ * 左モーター回転角速度(度/秒)を設定する
+ * @param leftRotationSpeed
+ * @author 駒井
+ */
 	public void setLeftRotationSpeed(float leftRotationSpeed) {
 		controlWheel.setLeftRotationSpeed(leftRotationSpeed);
 	}
-
+/**
+ * 右モーター回転角速度(度/秒)を設定する
+ * @param rightRotationSpeed
+ * @author 駒井
+ */
 	public void setRightRotationSpeed(float rightRotationSpeed) {
 		controlWheel.setRightRotationSpeed(rightRotationSpeed);
 	}
