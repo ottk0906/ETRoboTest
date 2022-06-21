@@ -1,4 +1,4 @@
-package body.SelfPosition;
+package game.SelfPosition;
 
 import body.Body;
 

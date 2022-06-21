@@ -7,10 +7,13 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import body.Body;
-import body.SelfPosition.SelfPosition;
 import game.Game;
+import game.SelfPosition.SelfPosition;
 import lejos.hardware.lcd.LCD;
 import log.Log;
+//---> Add 2022/06/21 T.Okado
+import log.LogSelfPosition;
+//<--- Add 2022/06/21 T.Okado
 
 /**
  * タスク管理クラス
@@ -38,6 +41,8 @@ public class TaskManager {
 	//---> Add 2022/06/20 T.Okado
     // 自己位置推定クラス
     private SelfPosition selfPos;
+    // 自己位置推定ログクラス
+    private LogSelfPosition logSelfPos;
 	//<--- Add 2022/06/20 T.Okado
 
 
@@ -65,14 +70,22 @@ public class TaskManager {
 		// ---> Add 2022/06/20 T.Okado
 		// 自己位置推定のインスタンス生成
 		selfPos = new SelfPosition(game);
+		// 自己位置推定ログのインスタンス生成
+		logSelfPos = new LogSelfPosition(game, selfPos);
 		//<--- Add 2022/06/20 T.Okado
 
         //---> Modify 2022/06/20 T.Okado
         //gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
         gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, selfPos);
         //<--- Modify 2022/06/20 T.Okado
+
         gameTask.setPriority(Thread.MAX_PRIORITY);
-        logTask = new LogTask(log);
+
+        //---> Modify 2022/06/21 T.Okado
+        //logTask = new LogTask(log);
+        logTask = new LogTask(log, logSelfPos);
+        //<--- Modify 2022/06/21 T.Okado
+
         logTask.setPriority(Thread.NORM_PRIORITY);
 
         // 初期化完了

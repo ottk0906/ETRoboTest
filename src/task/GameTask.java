@@ -2,10 +2,10 @@ package task;
 
 import java.util.concurrent.CountDownLatch;
 
-import body.SelfPosition.SelfPosition;
 import body.control.Control;
 import body.measure.Measure;
 import game.Game;
+import game.SelfPosition.SelfPosition;
 import lejos.hardware.Button;
 
 /**

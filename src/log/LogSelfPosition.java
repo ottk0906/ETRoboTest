@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import body.SelfPosition.SelfPosition;
+import game.Game;
+import game.StateRun;
+import game.SelfPosition.SelfPosition;
 import lejos.hardware.lcd.LCD;
 
 /**
@@ -16,8 +18,11 @@ import lejos.hardware.lcd.LCD;
  */
 public class LogSelfPosition {
 
+	/** 競技 */
+	private Game game;
+
 	/** 自己位置推定 */
-	SelfPosition selfPos;
+	private SelfPosition selfPos;
 
     /** 自己位置推定ログデータリスト */
     private List<LogSelfPositionData> logList;
@@ -25,7 +30,8 @@ public class LogSelfPosition {
     /**
      * コンストラクタ
      */
-    public LogSelfPosition(SelfPosition selfPos) {
+    public LogSelfPosition(Game game, SelfPosition selfPos) {
+    	this.game = game;
     	this.selfPos = selfPos;
         logList = new ArrayList<LogSelfPositionData>();
     }
@@ -34,8 +40,12 @@ public class LogSelfPosition {
      * 実行する
      */
     public void run() {
-    	draw();
-    	add();
+		//走行中の場合のみ、自己位置推定ログ出力処理を実行する
+        if (game.getStatus() instanceof StateRun) {
+	    	draw();
+	    	add();
+	    	write();
+        }
     }
 
     /**
@@ -54,12 +64,12 @@ public class LogSelfPosition {
      * 画面出力する
      */
     private void draw() {
-        LCD.drawString("X-Coord", 0, 6);
-        LCD.drawString(String.valueOf(selfPos.getXCoord()) , 11, 6);
-        LCD.drawString("Y-Coord", 0, 7);
-        LCD.drawString(String.valueOf(selfPos.getYCoord()), 11, 7);
-        LCD.drawString("Angle", 0, 8);
-        LCD.drawString(String.valueOf(selfPos.getAccumAngle()), 11, 8);
+        LCD.drawString("X-Coord", 0, 5);
+        LCD.drawString(String.valueOf(selfPos.getXCoord()) , 11, 5);
+        LCD.drawString("Y-Coord", 0, 6);
+        LCD.drawString(String.valueOf(selfPos.getYCoord()), 11, 6);
+        LCD.drawString("Angle", 0, 7);
+        LCD.drawString(String.valueOf(selfPos.getAccumAngle()), 11, 7);
     }
 
     /**
