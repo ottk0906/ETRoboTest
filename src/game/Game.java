@@ -37,7 +37,7 @@ public class Game {
 
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 600f , 0.01f , 0.01f));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 800f , 0.01f , 0.01f));
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
@@ -91,6 +91,16 @@ public class Game {
     public boolean isOver() {
         return isOver;
     }
+
+    //---> Add 2022/06/20 T.Okado
+    /**
+     * 現在の競技状態を取得する
+     * @return 現在の競技状態
+     */
+    public State getStatus() {
+    	return state;
+    }
+    //<--- Add 2022/06/20 T.Okado
 
     /**
      * オブジェクトの文字列表現を取得する

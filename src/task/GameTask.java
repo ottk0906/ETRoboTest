@@ -2,6 +2,7 @@ package task;
 
 import java.util.concurrent.CountDownLatch;
 
+import body.SelfPosition.SelfPosition;
 import body.control.Control;
 import body.measure.Measure;
 import game.Game;
@@ -23,6 +24,10 @@ public class GameTask extends Thread {
     Game game;
     /** 制御 */
     Control control;
+    //---> Add 2022/06/20 T.Okado
+    /** 自己位置推定 */
+    SelfPosition selfPos;
+    //<--- Add 2022/06/20 T.Okado
 
     /**
      * コンストラクタ
@@ -31,11 +36,17 @@ public class GameTask extends Thread {
      * @param game 競技
      * @param control 制御
      */
-    public GameTask(CountDownLatch countDownLatch, Measure measure, Game game, Control control){
+    //---> Modify 2022/06/20 T.Okado
+    //public GameTask(CountDownLatch countDownLatch, Measure measure, Game game, Control control){
+    public GameTask(CountDownLatch countDownLatch, Measure measure, Game game, Control control, SelfPosition selfPos){
+    //<--- Modify 2022/06/20 T.Okado
         this.countDownLatch = countDownLatch;
         this.measure = measure;
         this.game = game;
         this.control = control;
+        //---> Add 2022/06/20 T.Okado
+        this.selfPos = selfPos;
+        //<--- Add 2022/06/20 T.Okado
     }
 
     /**
@@ -57,6 +68,10 @@ public class GameTask extends Thread {
 		measure.update();
         game.run();
 		control.run();
+        //---> Add 2022/06/20 T.Okado
+		//走行体を動作させた後に自己位置推定して、現在の座標位置を特定する
+		selfPos.run();
+        //<--- Add 2022/06/20 T.Okado
     }
 
 }

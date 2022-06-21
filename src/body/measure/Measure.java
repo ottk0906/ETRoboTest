@@ -11,8 +11,7 @@ public class Measure {
 	/** 路面計測 */
 	MeasureCourse measureCourse;
 	/** 車輪計測 */
-	/*MeasureWheel measureWheel;*/
-
+	MeasureWheel measureWheel;
 
 	/**
 	 * コンストラクタ
@@ -33,11 +32,11 @@ public class Measure {
 	 * @param measureCourse 路面計測
 	 * @param measureWheel 車輪計測
 	 */
-	/*public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel) {
+	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel) {
 		this.measureTouch = measureTouch;
 	    this.measureCourse = measureCourse;
 		this.measureWheel = measureWheel;
-	}*/
+	}
 
 	/**
 	 * 更新する
@@ -45,7 +44,7 @@ public class Measure {
 	public void update() {
 		measureTouch.update();
 		measureCourse.update();
-		/*measureWheel.update();*/
+		measureWheel.update();
 	}
 
 	/**
@@ -143,5 +142,14 @@ public class Measure {
 	/*public float getRightRotationSpeed() {
 	    return measureWheel.getRightRotationSpeed();
 	}*/
+
+    //---> Add 2022/06/20 T.Okado
+    public double getLeftAngleCount() {
+		return (double) measureWheel.getLeftTachoCount();
+    }
+    public double getRightAngleCount() {
+		return (double) measureWheel.getRightTachoCount();
+    }
+    //<--- Add 2022/06/20 T.Okado
 
 }

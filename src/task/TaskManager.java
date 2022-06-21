@@ -7,6 +7,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import body.Body;
+import body.SelfPosition.SelfPosition;
 import game.Game;
 import lejos.hardware.lcd.LCD;
 import log.Log;
@@ -17,20 +18,35 @@ import log.Log;
  *
  */
 public class TaskManager {
-    
+
     // 競技タスク
     private GameTask gameTask;
-    Game game;
-    //　ログタスク
+
+    //---> Modify 2022/06/20 T.Okado
+    //Game game;
+    private Game game;
+	//<--- Modify 2022/06/20 T.Okado
+
+    // ログタスク
     private LogTask logTask;
-    Log log;
-    
+
+    //---> Modify 2022/06/20 T.Okado
+    //Log log;
+    private Log log;
+	//<--- Modify 2022/06/20 T.Okado
+
+	//---> Add 2022/06/20 T.Okado
+    // 自己位置推定クラス
+    private SelfPosition selfPos;
+	//<--- Add 2022/06/20 T.Okado
+
+
     // スケジューラ
     private ScheduledExecutorService scheduler;
     private ScheduledFuture<?> futureGame;
     private ScheduledFuture<?> futureLog;
     private CountDownLatch countDownLatch;
-    
+
     /**
      * コンストラクタ
      */
@@ -45,7 +61,16 @@ public class TaskManager {
         // タスク生成
         game = new Game();
         log = new Log(game);
-        gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
+
+		// ---> Add 2022/06/20 T.Okado
+		// 自己位置推定のインスタンス生成
+		selfPos = new SelfPosition(game);
+		//<--- Add 2022/06/20 T.Okado
+
+        //---> Modify 2022/06/20 T.Okado
+        //gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
+        gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, selfPos);
+        //<--- Modify 2022/06/20 T.Okado
         gameTask.setPriority(Thread.MAX_PRIORITY);
         logTask = new LogTask(log);
         logTask.setPriority(Thread.NORM_PRIORITY);
@@ -53,7 +78,7 @@ public class TaskManager {
         // 初期化完了
         Beep.ring();
     }
-    
+
     /**
      * タスクのスケジューリング
      */
@@ -61,7 +86,7 @@ public class TaskManager {
         futureGame = scheduler.scheduleAtFixedRate(gameTask, 0, 10, TimeUnit.MILLISECONDS);
         futureLog = scheduler.scheduleAtFixedRate(logTask, 0, 500, TimeUnit.MILLISECONDS);
     }
-    
+
     /**
      * 競技タスクが終了するまで待つ
      */
@@ -69,10 +94,10 @@ public class TaskManager {
         try{
             countDownLatch.await();
         }catch(InterruptedException e){
-            
+
         }
     }
-    
+
     /**
      * タスクの実行の取り消しとスケジューラのシャットダウン
      */
@@ -85,5 +110,5 @@ public class TaskManager {
         }
         scheduler.shutdownNow();
         log.write();
-    }    
+    }
 }

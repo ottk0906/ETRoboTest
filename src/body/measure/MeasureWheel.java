@@ -12,28 +12,37 @@ public class MeasureWheel {
     private KamogawaRegulatedMotor leftMotor;
     /** 右モータ */
     private KamogawaRegulatedMotor rightMotor;
-    
+
     /** 左モータの角速度(度/秒) */
     private float leftRotationSpeed;
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
-    
+
+    //---> Add 2022/06/20 T.Okado
+    private int tachoCountL;		//左モータのタコメータのエンコード値
+    private int tachoCountR;		//右モータのタコメータのエンコード値
+    //<--- Add 2022/06/20 T.Okado
+
     /**
      * コンストラクタ
      * @param leftMotor 左モータ
-     * @param rightMotor 右モータ 
+     * @param rightMotor 右モータ
      */
     public MeasureWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
         this.leftMotor = leftMotor;
         this.rightMotor = rightMotor;
     }
-    
+
     /**
      * 更新する
      */
     public void update() {
         leftRotationSpeed = leftMotor.getRotationSpeed();
         rightRotationSpeed = rightMotor.getRotationSpeed();
+        //---> Add 2022/06/20 T.Okado
+        tachoCountL = leftMotor.getTachoCount() ;		//左モータのタコメータのエンコード値を更新する
+        tachoCountR = rightMotor.getTachoCount() ;		//右モータのタコメータのエンコード値を更新する
+        //<--- Add 2022/06/20 T.Okado
     }
 
     /**
@@ -51,5 +60,15 @@ public class MeasureWheel {
     public float getRightRotationSpeed() {
         return rightRotationSpeed;
     }
+
+    //---> Add 2022/06/20 T.Okado
+    public int getLeftTachoCount() {
+		return tachoCountL;
+    }
+    public int getRightTachoCount() {
+		return tachoCountR;
+    }
+    //<--- Add 2022/06/20 T.Okado
+
 
 }
