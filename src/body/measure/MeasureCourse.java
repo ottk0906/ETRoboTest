@@ -19,7 +19,7 @@ public class MeasureCourse{
     /** 目標明度 */
     private float target;
     /** 路面RGB（赤、緑、青） */
-	/*private float rgb[];*/
+	private float rgb[];
     /** 路面HSV（色相、彩度、明度） */
     private float hsv[];
 
@@ -30,7 +30,7 @@ public class MeasureCourse{
     public MeasureCourse(EV3ColorSensor colorSensor){
         this.colorSensor = colorSensor;
         sensorMode =  colorSensor.getRGBMode();
-		/*rgb = new float[sensorMode.sampleSize()];*/
+		rgb = new float[sensorMode.sampleSize()];
         hsv = new float[3];
 
 		// 仮キャリブレーション
@@ -43,8 +43,6 @@ public class MeasureCourse{
      * 更新する
      */
     public void update() {
-    	//路面RGB（赤、緑、青）
-    	float[] rgb = new float[sensorMode.sampleSize()];
 
         // RGBを取得する
         sensorMode.fetchSample(rgb, 0);
@@ -105,17 +103,17 @@ public class MeasureCourse{
      * 路面色相を取得する
      * @return　路面色相
      */
-	/*public float getHue(){
+	public float getHue(){
 	    return hsv[0];
-	}*/
+	}
 
     /**
      * 路面彩度を取得する
      * @return　路面彩度
      */
-	/*public float getSaturation(){
+	public float getSaturation(){
 	    return hsv[1];
-	}*/
+	}
 
     /**
      * 路面明度を取得する
@@ -129,7 +127,6 @@ public class MeasureCourse{
      * RGBをHSVに変換する
      */
     private void convertRGBtoHSV(float[] rgb) {
-	/*private float[] convertRGBtoHSV(float[] rgb) {*/
         // rgb（赤:Red、緑:Green、青:Blue）
         float r = rgb[0];
         float g = rgb[1];
@@ -170,8 +167,7 @@ public class MeasureCourse{
 		hsv[0] = h;
 		hsv[1] = s;
 		hsv[2] = v;
-		/*float[] hsv = {h,s,v};
-		return hsv;*/
+
     }
 
 

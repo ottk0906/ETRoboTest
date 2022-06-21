@@ -1,6 +1,6 @@
 package body.control;
 
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import hardware.KamogawaRegulatedMotor;
 
 /**
  * 車輪制御クラス
@@ -8,11 +8,9 @@ import lejos.hardware.motor.EV3LargeRegulatedMotor;
  */
 public class ControlWheel {
     /** 左モータ */
-	/*private KamogawaRegulatedMotor leftMotor;*/
-	private EV3LargeRegulatedMotor leftMotor;
+	private KamogawaRegulatedMotor leftMotor;
     /** 右モータ */
-	/*private KamogawaRegulatedMotor rightMotor;*/
-	private EV3LargeRegulatedMotor rightMotor;
+	private KamogawaRegulatedMotor rightMotor;
 
     /** 左モータの角速度(度/秒) */
     private float leftRotationSpeed;
@@ -24,20 +22,14 @@ public class ControlWheel {
      * @param leftMotor 左モータ
      * @param rightMotor　右モータ
      */
-	/*public ControlWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
+	public ControlWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
 	    this.leftMotor = leftMotor;
 	    this.rightMotor = rightMotor;
-	}*/
-	public ControlWheel(EV3LargeRegulatedMotor leftMotor,EV3LargeRegulatedMotor rightMotor) {
-		this.leftMotor = leftMotor;
-		this.rightMotor = rightMotor;
 	}
 
     /**
      * 制御する
      */
-    /* 回転させるメソッドを作ったほうが良いか？
-     * ward(Motor xxMotor,float xxspeed)*/
     public void run(){
         leftMotor.setSpeed(leftRotationSpeed);
         rightMotor.setSpeed(rightRotationSpeed);

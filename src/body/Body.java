@@ -5,7 +5,7 @@ import body.control.ControlWheel;
 import body.measure.Measure;
 import body.measure.MeasureCourse;
 import body.measure.MeasureTouch;
-import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import hardware.KamogawaRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
@@ -33,10 +33,8 @@ public final class Body {
         // ハードウェアの初期化
 		EV3TouchSensor touchSensor = new EV3TouchSensor(SensorPort.S1);
         EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
-		/*KamogawaRegulatedMotor leftMotor = new KamogawaRegulatedMotor(MotorPort.C);*/
-		EV3LargeRegulatedMotor leftMotor = new EV3LargeRegulatedMotor(MotorPort.C);
-		/*KamogawaRegulatedMotor rightMotor = new KamogawaRegulatedMotor(MotorPort.B);*/
-		EV3LargeRegulatedMotor rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+		KamogawaRegulatedMotor leftMotor = new KamogawaRegulatedMotor(MotorPort.C);
+		KamogawaRegulatedMotor rightMotor = new KamogawaRegulatedMotor(MotorPort.B);
 
         // 計測の初期化
 		MeasureTouch measureTouch = new MeasureTouch(touchSensor);
@@ -56,16 +54,4 @@ public final class Body {
     private Body(){
 
     }
-
-	/*public float getRadius() {
-		return RADIUS;
-	}
-
-	public float getDiameter() {
-		return DIAMETER;
-	}
-
-	public static float getTread() {
-		return TREAD;
-	}*/
 }

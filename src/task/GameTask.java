@@ -54,9 +54,9 @@ public class GameTask extends Thread {
         if(Button.ESCAPE.isDown() || game.isOver()){
             countDownLatch.countDown();
         }
-		/*measure.update();*/
+		measure.update();
         game.run();
-		/*control.run();*/
+		control.run();
     }
 
 }

@@ -7,13 +7,18 @@ import body.Body;
  *
  */
 public class ActivityRunPID extends ActivityRun {
-
+	/**処理周期*/
 	private float DELTA_T = 0.010f;
+	/**偏差（前回の偏差、今回の偏差）*/
 	private float kago[] = new float[2];
+	/**平均偏差/秒*/
 	private float integral;
 
+	/**比例係数*/
 	private final float KP;
+	/**積分係数*/
 	private final float KI;
+	/**微分係数*/
 	private final float KD;
 
 	public ActivityRunPID(float forward, float turn, float KP, float KI, float KD) {
