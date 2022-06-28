@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+
 import game.activity.Activity;
 import game.guard.Guard;
 import task.Beep;
@@ -8,7 +9,6 @@ import task.Beep;
 /**
  * 競技状態クラス
  * デザインパターンのStateパターンを採用
- * @author 後藤　聡文
  *
  */
 public abstract class State {
@@ -75,7 +75,7 @@ public abstract class State {
      * UMLステートマシン図のexitアクション
      */
     public void exitAction() {
-        activityList.get(index-1).exitAction();        
+        activityList.get(index-1).exitAction();
     }
 
     /**
@@ -91,7 +91,7 @@ public abstract class State {
     public int getIndex() {
         return index;
     }
-    
+
     /**
      * リストのサイズを取得する
      * @return
@@ -111,7 +111,7 @@ public abstract class State {
         sb.append(getIndex() + 1);
         sb.append("/");
         sb.append(getSize());
-        
+
         return sb.toString();
     }
 }
