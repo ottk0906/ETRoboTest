@@ -8,24 +8,18 @@ import body.Body;
  *
  */
 public class ActivityTurn extends Activity {
-    enum PIVOT {
-        LEFT, RIGHT
-    };
+
 
     /** 回転角速度(度/秒) */
     private final float TURN = 90.0f;
-    private PIVOT pivot;
+    private boolean param;
 
     /**
      *
      * @param pivot  0なら左回転、１なら右回転
      */
-    public ActivityTurn(int pivot) {
-        if (pivot == 0) {
-            this.pivot = PIVOT.LEFT;
-        } else if (pivot == 1) {
-            this.pivot = PIVOT.RIGHT;
-        }
+    public ActivityTurn(boolean param) {
+            this.param = param;
     }
 
     /**
@@ -34,11 +28,11 @@ public class ActivityTurn extends Activity {
     @Override
     public void doActivity() {
         // 軸足回転
-        if (pivot == PIVOT.LEFT) {
+        if (param) {
             Body.control.setLeftRotationSpeed(0.0f);
-            Body.control.setRightRotationSpeed(TURN);
-        } else if (pivot == PIVOT.RIGHT) {
-            Body.control.setLeftRotationSpeed(TURN);
+            Body.control.setRightRotationSpeed(2*((Body.TREAD * TURN) / (Body.DIAMETER)));
+        } else {
+            Body.control.setLeftRotationSpeed(2*((Body.TREAD * TURN) / (Body.DIAMETER)));
             Body.control.setRightRotationSpeed(0.0f);
         }
 

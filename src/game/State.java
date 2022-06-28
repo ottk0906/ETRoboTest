@@ -1,6 +1,8 @@
 package game;
 
 import java.util.ArrayList;
+
+import body.Body;
 import game.activity.Activity;
 import game.guard.Guard;
 import task.Beep;
@@ -58,6 +60,7 @@ public abstract class State {
      */
     public void doActivity(Game game) {
         if (guardList.get(index).judge()) {
+            Body.measure.resetTime();
             index++;
             if(index >= guardList.size()){
                 changeState(game);
@@ -75,7 +78,7 @@ public abstract class State {
      * UMLステートマシン図のexitアクション
      */
     public void exitAction() {
-        activityList.get(index-1).exitAction();        
+        activityList.get(index-1).exitAction();
     }
 
     /**
@@ -91,7 +94,7 @@ public abstract class State {
     public int getIndex() {
         return index;
     }
-    
+
     /**
      * リストのサイズを取得する
      * @return
@@ -111,7 +114,7 @@ public abstract class State {
         sb.append(getIndex() + 1);
         sb.append("/");
         sb.append(getSize());
-        
+
         return sb.toString();
     }
 }

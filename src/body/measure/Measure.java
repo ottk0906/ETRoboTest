@@ -13,19 +13,22 @@ public class Measure {
     MeasureCourse measureCourse;
     /** 車輪計測 */
     MeasureWheel measureWheel;
-    
+    /** 時間計測 **/
+    MeasureTime measureTime;
+
     /**
      * コンストラクタ
      * @param measureTouch タッチ計測
      * @param measureCourse 路面計測
      * @param measureWheel 車輪計測
      */
-    public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel) {
+    public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel, MeasureTime measureTime) {
         this.measureTouch = measureTouch;
         this.measureCourse = measureCourse;
         this.measureWheel = measureWheel;
+        this.measureTime = measureTime;
     }
-    
+
     /**
      * 更新する
      */
@@ -34,7 +37,7 @@ public class Measure {
         measureCourse.update();
         measureWheel.update();
     }
-    
+
     /**
      * タッチセンサが離されたか
      * @return タッチセンサが離された場合はtrue
@@ -42,7 +45,7 @@ public class Measure {
     public boolean isUpped() {
         return measureTouch.isUpped();
     }
-    
+
     /**
      * 白明度を取得する
      * @return　白明度
@@ -74,7 +77,7 @@ public class Measure {
     public void setBlack(float black) {
         measureCourse.setBlack(black);
     }
-    
+
     /**
      * 目標明度を取得する
      * @return　目標明度
@@ -82,7 +85,7 @@ public class Measure {
     public float getTarget() {
         return measureCourse.getTarget();
     }
-    
+
     /**
      * 目標明度を設定する
      * @param target　目標明度
@@ -90,7 +93,7 @@ public class Measure {
     public void setTarget(float target) {
         measureCourse.setTarget(target);
     }
-    
+
     /**
      * 路面色相を取得する
      * @return　色相
@@ -98,7 +101,7 @@ public class Measure {
     public float getHue(){
         return measureCourse.getHue();
     }
-    
+
     /**
      * 路面彩度を取得する
      * @return　彩度
@@ -106,7 +109,7 @@ public class Measure {
     public float getSaturation(){
         return measureCourse.getSaturation();
     }
-    
+
     /**
      * 路面明度を取得する
      * @return　路面明度
@@ -114,7 +117,7 @@ public class Measure {
     public float getValue() {
         return measureCourse.getValue();
     }
-    
+
     /**
      * 左モータの角速度(度/秒)を計測する
      * @return leftRotationSpeed　左モータの角速度(度/秒)
@@ -130,5 +133,13 @@ public class Measure {
     public float getRightRotationSpeed() {
         return measureWheel.getRightRotationSpeed();
     }
+
+    public void resetTime() {
+    	measureTime.resetTime();
+    }
+
+	public int getTime(){
+		return measureTime.getTime();
+	}
 
 }

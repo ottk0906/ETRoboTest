@@ -4,6 +4,7 @@ import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
 import game.activity.ActivityTurn;
+import game.guard.GuardTime;
 import game.guard.GuardTouch;
 
 /**
@@ -37,8 +38,15 @@ public class Game {
         StateRun.getInstance().add(new GuardTouch(), new ActivityRun(100, 90.0f));
         StateRun.getInstance().add(new GuardTouch(), new ActivityRun(100, -90.0f));*/
 
-        StateRun.getInstance().add(new GuardTouch(), new ActivityTurn(0));
-        StateRun.getInstance().add(new GuardTouch(), new ActivityTurn(1));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+        StateRun.getInstance().add(new GuardTime(4000), new ActivityTurn(LR.RIGHT.getParam()));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+        StateRun.getInstance().add(new GuardTime(4000), new ActivityTurn(LR.LEFT.getParam()));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+        StateRun.getInstance().add(new GuardTime(4000), new ActivityTurn(LR.LEFT.getParam()));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+        StateRun.getInstance().add(new GuardTime(4000), new ActivityTurn(LR.RIGHT.getParam()));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
