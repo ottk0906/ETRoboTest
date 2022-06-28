@@ -19,13 +19,13 @@ public class MeasureWheel {
     private float rightRotationSpeed;
 
     //---> Add 2022/06/20 T.Okado
-    private int tachoCountL;		//左モータのタコメータのエンコード値
-    private int tachoCountR;		//右モータのタコメータのエンコード値
+    private float anglePosL;		//左モータの現在位置の角度
+    private float anglePosR;		//右モータの現在位置の角度
     //<--- Add 2022/06/20 T.Okado
 
     /**
      * コンストラクタ
-     * @param leftMotor 左モータ
+     * @param leftMotor  左モータ
      * @param rightMotor 右モータ
      */
     public MeasureWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
@@ -40,8 +40,8 @@ public class MeasureWheel {
         leftRotationSpeed = leftMotor.getRotationSpeed();
         rightRotationSpeed = rightMotor.getRotationSpeed();
         //---> Add 2022/06/20 T.Okado
-        tachoCountL = leftMotor.getTachoCount() ;		//左モータのタコメータのエンコード値を更新する
-        tachoCountR = rightMotor.getTachoCount() ;		//右モータのタコメータのエンコード値を更新する
+        anglePosL = leftMotor.getPosition() ;	//左モータの現在位置の角度
+        anglePosR = rightMotor.getPosition() ;	//右モータの現在位置の角度
         //<--- Add 2022/06/20 T.Okado
     }
 
@@ -62,11 +62,20 @@ public class MeasureWheel {
     }
 
     //---> Add 2022/06/20 T.Okado
-    public int getLeftTachoCount() {
-		return tachoCountL;
+    /**
+     * 左モータの現在位置の角度を取得する
+     * @return 左モータの現在位置の角度
+     */
+    public float getLeftAnglePosition() {
+		return anglePosL;
     }
-    public int getRightTachoCount() {
-		return tachoCountR;
+
+	/**
+	 * 右モータの現在位置の角度を取得する
+	 * @return 右モータの現在位置の角度
+	 */
+    public float getRightAnglePosition() {
+		return anglePosR;
     }
     //<--- Add 2022/06/20 T.Okado
 

@@ -54,10 +54,21 @@ public class LogSelfPosition {
     private void add() {
     	//自己位置推定ログデータクラスのインスタンスを生成し、ログリストに追加する
         logList.add(
-        		new LogSelfPositionData(
-        			selfPos.getXCoord(), selfPos.getYCoord(), selfPos.getAccumAngle()
-        		)
-    		);
+        	new LogSelfPositionData(
+        		selfPos.getXCoord(),
+        		selfPos.getYCoord(),
+        		selfPos.getAfterRadianToAngle(),
+        		selfPos.getAccumDistance(),
+        		selfPos.getOdometryX(),
+        		selfPos.getOdometryY(),
+        		selfPos.getOdometryRadianToAngle(),
+        		selfPos.getLeftDistnce(),
+        		selfPos.getRightDistnce(),
+        		selfPos.getDistnce(),
+        		selfPos.getLeftBeforeAngle(),
+        		selfPos.getRightBeforeAngle()
+        	)
+    	);
     }
 
     /**
@@ -69,7 +80,7 @@ public class LogSelfPosition {
         LCD.drawString("Y-Coord", 0, 6);
         LCD.drawString(String.valueOf(selfPos.getYCoord()), 11, 6);
         LCD.drawString("Angle", 0, 7);
-        LCD.drawString(String.valueOf(selfPos.getAccumAngle()), 11, 7);
+        LCD.drawString(String.valueOf(selfPos.getAfterRadianToAngle()), 11, 7);
     }
 
     /**

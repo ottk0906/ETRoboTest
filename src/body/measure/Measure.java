@@ -144,11 +144,20 @@ public class Measure {
 	}*/
 
     //---> Add 2022/06/20 T.Okado
-    public double getLeftAngleCount() {
-		return (double) measureWheel.getLeftTachoCount();
+    /**
+     * 左モータの現在位置の角度を取得する
+     * @return 左モータの現在位置の角度
+     */
+    public float getLeftAnglePosition() {
+		return measureWheel.getLeftAnglePosition();
     }
-    public double getRightAngleCount() {
-		return (double) measureWheel.getRightTachoCount();
+
+    /**
+	 * 右モータの現在位置の角度を取得する
+	 * @return 右モータの現在位置の角度
+	 */
+    public float getRightAnglePosition() {
+		return measureWheel.getRightAnglePosition();
     }
     //<--- Add 2022/06/20 T.Okado
 

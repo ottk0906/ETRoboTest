@@ -32,12 +32,18 @@ public class Game {
      */
     public Game() {
         StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
-
         StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
-
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 800f , 0.01f , 0.01f));
+        //---> Modify 2022/06/22 T.Okado
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 1000f , 0.01f , 0.01f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 45.0f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , -45.0f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 0.0f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(-200.0f , 0.0f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityRunOnOff(200, 100.0f));
+
+        //<--- Modify 2022/06/22 T.Okado
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
