@@ -35,6 +35,7 @@ public class ControlWheel {
     public void run(){
         leftMotor.setSpeed(leftRotationSpeed);
         rightMotor.setSpeed(rightRotationSpeed);
+
         if(leftRotationSpeed >= 0){
             leftMotor.forward();
         }else{

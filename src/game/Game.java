@@ -1,12 +1,14 @@
 package game;
 
+import body.Body;
 import body.control.Control;
 import body.measure.Measure;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
-import game.activity.ActivityRunPID;
+import game.activity.ActivityTurnTest;
 import game.guard.GuardTouch;
+import game.guard.GuardTurnStop;
 
 /**
  * 競技クラス
@@ -24,8 +26,9 @@ public class Game {
     /** 競技状態 */
     private State state;
 
-    /** 競技が終了したか */
+	/** 競技が終了したか */
     private boolean isOver = false;
+
 
     /**
      * コンストラクタ
@@ -36,14 +39,18 @@ public class Game {
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
         //---> Modify 2022/06/22 T.Okado
-        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 1000f , 0.01f , 0.01f));
+        //StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 900f , 0.01f , 0.01f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 45.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , -45.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 0.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(-200.0f , 0.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityRunOnOff(200, 100.0f));
-
         //<--- Modify 2022/06/22 T.Okado
+
+        //---> Add 2022/06/29 T.Okado
+        Body.selfPos.setTurnStartInfo(540.0);
+        StateRun.getInstance().add(new GuardTurnStop(), new ActivityTurnTest(200.0f , 45.0f));
+        //<--- Add 2022/06/29 T.Okado
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
