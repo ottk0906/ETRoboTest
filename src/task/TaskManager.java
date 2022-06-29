@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import body.Body;
 import game.Game;
-import game.SelfPosition.SelfPosition;
 import lejos.hardware.lcd.LCD;
 import log.Log;
 //---> Add 2022/06/21 T.Okado
@@ -39,12 +38,9 @@ public class TaskManager {
 	//<--- Modify 2022/06/20 T.Okado
 
 	//---> Add 2022/06/20 T.Okado
-    // 自己位置推定クラス
-    private SelfPosition selfPos;
     // 自己位置推定ログクラス
     private LogSelfPosition logSelfPos;
 	//<--- Add 2022/06/20 T.Okado
-
 
     // スケジューラ
     private ScheduledExecutorService scheduler;
@@ -67,17 +63,20 @@ public class TaskManager {
         game = new Game();
         log = new Log(game);
 
-		// ---> Add 2022/06/20 T.Okado
-		// 自己位置推定のインスタンス生成
-		selfPos = new SelfPosition(game);
-		// 自己位置推定ログのインスタンス生成
-		logSelfPos = new LogSelfPosition(game, selfPos);
-		//<--- Add 2022/06/20 T.Okado
+        // ---> Modify 2022/06/29 T.Okado
+		//selfPos = new SelfPosition(game);
+		//logSelfPos = new LogSelfPosition(game, selfPos);
 
-        //---> Modify 2022/06/20 T.Okado
+		// 自己位置推定インスタンスにgemeクラスのインスタンスを設定する
+        Body.selfPos.setGameInstance(game);
+		// 自己位置推定ログのインスタンス生成
+		logSelfPos = new LogSelfPosition(game, Body.selfPos);
+		//<--- Modify 2022/06/29 T.Okado
+
+        //---> Modify 2022/06/29 T.Okado
         //gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
-        gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, selfPos);
-        //<--- Modify 2022/06/20 T.Okado
+        gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, Body.selfPos);
+        //<--- Modify 2022/06/29 T.Okado
 
         gameTask.setPriority(Thread.MAX_PRIORITY);
 
