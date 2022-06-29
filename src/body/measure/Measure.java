@@ -134,6 +134,25 @@ public class Measure {
         return measureWheel.getRightRotationSpeed();
     }
 
+  //---> Add 2022/06/20 T.Okado
+    /**
+     * 左モータの現在位置の角度を取得する
+     * @return 左モータの現在位置の角度
+     */
+    public float getLeftAnglePosition() {
+		return measureWheel.getLeftAnglePosition();
+    }
+
+    /**
+	 * 右モータの現在位置の角度を取得する
+	 * @return 右モータの現在位置の角度
+	 */
+    public float getRightAnglePosition() {
+		return measureWheel.getRightAnglePosition();
+    }
+    //<--- Add 2022/06/20 T.Okado
+
+
     public void resetTime() {
     	measureTime.resetTime();
     }

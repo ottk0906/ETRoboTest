@@ -22,6 +22,22 @@ public class ActivityTurn extends Activity {
             this.param = param;
     }
 
+//    /**
+//     * 継続動作を実行する 目標速度と目標回転角速度を設定する
+//     */
+//    @Override
+//    public void doActivity() {
+//        // 軸足回転
+//        if (param) {
+//            Body.control.setLeftRotationSpeed(0.0f);
+//            Body.control.setRightRotationSpeed(2*((Body.TREAD * TURN) / (Body.DIAMETER)));
+//        } else {
+//            Body.control.setLeftRotationSpeed(2*((Body.TREAD * TURN) / (Body.DIAMETER)));
+//            Body.control.setRightRotationSpeed(0.0f);
+//        }
+//
+//    }
+
     /**
      * 継続動作を実行する 目標速度と目標回転角速度を設定する
      */

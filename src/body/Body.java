@@ -7,6 +7,7 @@ import body.measure.MeasureCourse;
 import body.measure.MeasureTime;
 import body.measure.MeasureTouch;
 import body.measure.MeasureWheel;
+import game.SelfPosition.SelfPosition;
 import hardware.KamogawaRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
@@ -24,12 +25,22 @@ public final class Body {
     /** 制御 */
     public static final Control control;
 
+	//---> Add 2022/06/29 T.Okado
+    // 自己位置推定クラス
+    public static final SelfPosition selfPos;
+	//<--- Add 2022/06/29 T.Okado
+
     /** 車輪の半径(mm) */
     public static final float RADIUS = 50.0f;
     /** 車輪の直径(mm) */
     public static final float DIAMETER = 2.0f * RADIUS;
     /** 左右動輪の間隔(mm) */
     public static final float TREAD = 150.0f;
+
+    //---> Add 2022/06/20 T.Okado
+    /** 車輪の円周(mm) */
+    public static final float CIRCLE = 320.0f;
+    //<--- Add 2022/06/20 T.Okado
 
     static {
 
@@ -48,6 +59,11 @@ public final class Body {
         // 制御の初期化
         ControlWheel controlWheel = new ControlWheel(leftMotor, rightMotor);
         control = new Control(controlWheel);
+
+      //---> Add 2022/06/29 T.Okado
+	    // 自己位置推定クラス
+	    selfPos = new SelfPosition();
+		//<--- Add 2022/06/29 T.Okado
 
     }
 

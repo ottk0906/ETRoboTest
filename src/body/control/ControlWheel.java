@@ -12,12 +12,12 @@ public class ControlWheel {
     private KamogawaRegulatedMotor leftMotor;
     /** 右モータ */
     private KamogawaRegulatedMotor rightMotor;
-    
+
     /** 左モータの角速度(度/秒) */
     private float leftRotationSpeed;
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
-    
+
     /**
      * コンストラクタ
      * @param leftMotor 左モータ
@@ -34,6 +34,7 @@ public class ControlWheel {
     public void run(){
         leftMotor.setSpeed(leftRotationSpeed);
         rightMotor.setSpeed(rightRotationSpeed);
+
         if(leftRotationSpeed >= 0){
             leftMotor.forward();
         }else{
