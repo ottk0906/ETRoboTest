@@ -6,10 +6,7 @@ import body.Body;
  * 旋回動作停止条件
  * @author 尾角 武俊
  */
-public class GuardTurnStop extends Guard  {
-
-	public GuardTurnStop() {
-	}
+public class GuardTurnStop extends Guard {
 
     /**
      * 旋回停止を判定する

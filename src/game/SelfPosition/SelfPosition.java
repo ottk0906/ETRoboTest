@@ -5,7 +5,7 @@ import game.StateRun;
 
 /**
  * 自己位置推定クラス
- * デザインパターンのFacadeパターンを採用
+ * デザインパターンのSingletonパターンを採用
  * @author 尾角 武俊
  */
 //---> Modify 2022/06/29 T.Okado
@@ -19,8 +19,11 @@ public final class SelfPosition {
 	private CalcSelfPosition calcSelfPos;
 
     //---> Add 2022/06/29 T.Okado
-    private double startRadian;	//回転開始時の走行体の角度（ラジアン単位）
+    private double startRadian;	//回転計測開始時の走行体の角度（ラジアン単位）
 	private double moveRadian;	//移動角度（ラジアン単位）
+	private double startDistance;	//走行計測開始時の走行体の積算移動距離(mm単位)
+	private double moveDistance;	//移動距離(mm単位)
+
     //<--- Add 2022/06/29 T.Okado
 
     /**
@@ -61,7 +64,7 @@ public final class SelfPosition {
      */
 	public void setTurnStartInfo(double moveAngle) {
 		this.moveRadian = moveAngle * (Math.PI / 180);		//移動回転角度を設定する（ラジアンに変換）
-		this.startRadian = getAfterRadian();				//回転動作開始時の走行体の回転角度(ラジアン)を取得する
+		this.startRadian = getAfterRadian();				//回転動作計測開始時の走行体の回転角度(ラジアン)を取得する
 	}
 
     /**
@@ -72,14 +75,39 @@ public final class SelfPosition {
 		//現在の走行体の回転角度を取得する
 		double tmpRadian = getAfterRadian();
 
-		//現在の回転角度と回転動作開始時の回転角度の差分が移動回転角度以上になった場合に回転停止と判定する
+		//現在の回転角度と計測開始時の回転角度の差分が移動回転角度以上になった場合に回転停止と判定する
 		if (Math.abs(tmpRadian - startRadian) >= moveRadian) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-    //<--- Add 2022/06/29 T.Okado
+
+    /**
+     * 距離による走行動作の開始設定
+     * @param moveDistance 移動回距離(mm単位)
+     */
+	public void setDistanceStartInfo(double moveDistance) {
+		this.moveDistance = moveDistance;			//移動距離を設定する
+		this.startDistance = getAccumDistance();	//移動計測開始時の走行体の積算距離を取得する
+	}
+
+    /**
+     * 距離による走行動作の停止判定
+     * @return	True : 走行停止 / False ： 走行中
+     */
+	public boolean isDistanceStopped() {
+		//現在の走行体の積算移動距離を取得する
+		double tmpDistance = getAccumDistance();
+
+		//現在の積算移動と計測開始時の積算移動距離の差分が移動距離以上になった場合に走行停止と判定する
+		if (Math.abs(tmpDistance - startDistance) >= moveDistance) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//<--- Add 2022/06/29 T.Okado
 
 	//************* タスク周期間の移動距離のgetter() *************
 
