@@ -122,6 +122,5 @@ public class TaskManager {
         }
         scheduler.shutdownNow();
         log.write();
-
     }
 }

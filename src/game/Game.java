@@ -6,9 +6,9 @@ import body.measure.Measure;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
-import game.activity.ActivityTurnTest;
+import game.activity.ActivityRunPID;
+import game.guard.GuardDistanceStop;
 import game.guard.GuardTouch;
-import game.guard.GuardTurnStop;
 
 /**
  * 競技クラス
@@ -48,8 +48,12 @@ public class Game {
         //<--- Modify 2022/06/22 T.Okado
 
         //---> Add 2022/06/29 T.Okado
-        Body.selfPos.setTurnStartInfo(540.0);
-        StateRun.getInstance().add(new GuardTurnStop(), new ActivityTurnTest(200.0f , 45.0f));
+        //Body.selfPos.setTurnStartInfo(540.0);		//回転角度をセットする
+        //StateRun.getInstance().add(new GuardTurnStop(), new ActivityTurnTest(200.0f , 45.0f));
+        Body.selfPos.setDistanceStartInfo(3000);	//移動距離をセットする
+        StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
+        //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunOnOff(200, 100.0f));
+        //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityTurnTest(200.0f , 0.0f));
         //<--- Add 2022/06/29 T.Okado
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
