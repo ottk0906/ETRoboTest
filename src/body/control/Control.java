@@ -5,18 +5,20 @@ import body.Body;
 /**
  * 制御クラス
  * デザインパターンのFacadeパターンを採用
- * @author 後藤　聡文
  *
  */
 public class Control {
+	/***/
+	Body body;
+
     /** 車輪制御 */
     ControlWheel controlWheel;
-    
+
     /** 目標速度(mm/秒) */
     private float forward;
     /** 目標回転角速度(度/秒) */
     private float turn;
-    
+
     /**
      * コンストラクタ
      * @param controlWheel 車輪制御
@@ -24,7 +26,7 @@ public class Control {
     public Control(ControlWheel controlWheel) {
         this.controlWheel = controlWheel;
     }
-    
+
     /**
      * 制御する
      * 目標速度(mm/秒)と目標回転角速度(度/秒)から
@@ -32,10 +34,10 @@ public class Control {
      */
     public void run(){
         turn = (float)Math.toRadians(turn);
-        
+
         float leftRotationSpeed = (float) Math.toDegrees((2.0f * forward - Body.TREAD * turn) / Body.DIAMETER);
         float rightRotationSpeed = (float) Math.toDegrees((2.0f * forward + Body.TREAD * turn) / Body.DIAMETER);
-        
+
         controlWheel.setLeftRotationSpeed(leftRotationSpeed);
         controlWheel.setRightRotationSpeed(rightRotationSpeed);
         controlWheel.run();

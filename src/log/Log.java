@@ -19,7 +19,7 @@ import lejos.hardware.lcd.LCD;
 public class Log {
     /** 競技 */
     Game game;
-    
+
     /** ログデータリスト */
     private List<LogData> logList;
 
@@ -44,9 +44,11 @@ public class Log {
      */
     private void add() {
         logList.add(
-                new LogData(game.getCount(), game.toString(),
+                /*new LogData(game.getCount(), game.toString(),
                         Body.measure.getHue(), Body.measure.getSaturation(), Body.measure.getValue(),
-                        Body.measure.getLeftRotationSpeed(), Body.measure.getRightRotationSpeed()));
+                        Body.measure.getLeftRotationSpeed(), Body.measure.getRightRotationSpeed()));*/
+        		new LogData(game.toString(),
+        				Body.measure.getValue()));
     }
 
     /**
@@ -55,14 +57,25 @@ public class Log {
     private void draw() {
         LCD.clear();
         LCD.drawString(game.toString(), 0, 0);
-        LCD.drawString("White", 0, 2);
-        LCD.drawString(Float.toString(Body.measure.getWhite()), 11, 2);
-        LCD.drawString("Black", 0, 3);
-        LCD.drawString(Float.toString(Body.measure.getBlack()), 11, 3);
-        LCD.drawString("Target", 0, 4);
-        LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 4);
-        LCD.drawString("Value", 0, 5);
-        LCD.drawString(Float.toString(Body.measure.getValue()), 11, 5);
+
+        //---> Modify 2022/06/21 T.Okado
+        //LCD.drawString("White", 0, 2);
+        //LCD.drawString(Float.toString(Body.measure.getWhite()), 11, 2);
+        //LCD.drawString("Black", 0, 3);
+        //LCD.drawString(Float.toString(Body.measure.getBlack()), 11, 3);
+        //LCD.drawString("Target", 0, 4);
+        //LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 4);
+        //LCD.drawString("Value", 0, 5);
+        //LCD.drawString(Float.toString(Body.measure.getValue()), 11, 5);
+        LCD.drawString("White", 0, 1);
+        LCD.drawString(Float.toString(Body.measure.getWhite()), 11, 1);
+        LCD.drawString("Black", 0, 2);
+        LCD.drawString(Float.toString(Body.measure.getBlack()), 11, 2);
+        LCD.drawString("Target", 0, 3);
+        LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 3);
+        LCD.drawString("Value", 0, 4);
+        LCD.drawString(Float.toString(Body.measure.getValue()), 11, 4);
+        //<--- Modify 2022/06/21 T.Okado
     }
 
     /**
