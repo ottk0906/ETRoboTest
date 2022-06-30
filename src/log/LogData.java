@@ -21,17 +21,11 @@ public class LogData {
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
 
-
-    public LogData(String statusName, float value) {
-    	this.statusName = this.statusName;
-    	this.value = value;
-    }
-
     /**
      * コンストラクタ
-     * @param count
-     * @param statusName
-     * @param value
+     * @param count タスクの呼び出し回数
+     * @param statusName 競技状態名
+     * @param value 路面明度
      */
     public LogData(int count, String statusName, float value) {
     	this.count = count;
@@ -45,7 +39,7 @@ public class LogData {
      * @param status 競技状態名
      * @param hue 路面色相
      * @param saturation 路面彩度
-     * @param brightness 路面明度
+     * @param value 路面明度
      * @param leftRotationSpeed 左モータの角速度(度/秒)
      * @param rightRotationSpeed 右モータの角速度(度/秒)
      */

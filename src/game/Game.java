@@ -13,7 +13,7 @@ import game.guard.GuardTouch;
 public class Game {
 
     /** タスク呼出回数 */
-	/*private int count = 0;*/
+	private int count = 0;
 
     /** 競技状態 */
     private State state;
@@ -31,7 +31,7 @@ public class Game {
 
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 600f , 0.01f , 0.01f));
+        StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200.0f, 0.0f, 1500.0f, 50.0f, 0.1f));
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
@@ -56,9 +56,9 @@ public class Game {
      * タスク呼出回数を取得する
      * @return タスク呼出回数
      */
-	/*public int getCount() {
+	public int getCount() {
 	    return count;
-	}*/
+	}
 
     /**
      * 競技状態を遷移する

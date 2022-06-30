@@ -47,7 +47,7 @@ public class Log {
                 /*new LogData(game.getCount(), game.toString(),
                         Body.measure.getHue(), Body.measure.getSaturation(), Body.measure.getValue(),
                         Body.measure.getLeftRotationSpeed(), Body.measure.getRightRotationSpeed()));*/
-        		new LogData(game.toString(),
+        		new LogData(game.getCount(), game.toString(),
         				Body.measure.getValue()));
     }
 
