@@ -1,14 +1,14 @@
 package game;
 
-import body.Body;
 import body.control.Control;
 import body.measure.Measure;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
-import game.activity.ActivityRunPID;
+import game.activity.ActivityTurnTest;
 import game.guard.GuardDistanceStop;
 import game.guard.GuardTouch;
+import game.guard.GuardTurnStop;
 
 /**
  * 競技クラス
@@ -29,12 +29,11 @@ public class Game {
 	/** 競技が終了したか */
     private boolean isOver = false;
 
-
     /**
      * コンストラクタ
      */
     public Game() {
-        StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
+    	StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
         StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
@@ -48,10 +47,12 @@ public class Game {
         //<--- Modify 2022/06/22 T.Okado
 
         //---> Add 2022/06/29 T.Okado
-        //Body.selfPos.setTurnStartInfo(540.0);		//回転角度をセットする
-        //StateRun.getInstance().add(new GuardTurnStop(), new ActivityTurnTest(200.0f , 45.0f));
-        Body.selfPos.setDistanceStartInfo(3000);	//移動距離をセットする
-        StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
+        StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , 200.0f));
+        StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityTurnTest(200.0f , 0.0f));
+        StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , -200.0f));
+        StateRun.getInstance().add(new GuardDistanceStop(1500), new ActivityTurnTest(200.0f , 0.0f));
+
+        //StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunOnOff(200, 100.0f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityTurnTest(200.0f , 0.0f));
         //<--- Add 2022/06/29 T.Okado
