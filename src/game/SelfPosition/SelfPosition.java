@@ -5,7 +5,7 @@ import game.StateRun;
 
 /**
  * 自己位置推定クラス
- * デザインパターンのFacadeパターンを採用
+ * デザインパターンのSingletonパターンを採用
  * @author 尾角 武俊
  */
 //---> Modify 2022/06/29 T.Okado
@@ -17,11 +17,6 @@ public final class SelfPosition {
     private Game game;
 	/** 自己位置推定計算処理 */
 	private CalcSelfPosition calcSelfPos;
-
-    //---> Add 2022/06/29 T.Okado
-    private double startRadian;	//回転開始時の走行体の角度（ラジアン単位）
-	private double moveRadian;	//移動角度（ラジアン単位）
-    //<--- Add 2022/06/29 T.Okado
 
     /**
      * コンストラクタ
@@ -54,32 +49,7 @@ public final class SelfPosition {
 	public void setGameInstance(Game game) {
 		this.game = game;
 	}
-
-    /**
-     * 旋回動作の開始設定
-     * @param moveAngle	移動回転角度(360°単位)
-     */
-	public void setTurnStartInfo(double moveAngle) {
-		this.moveRadian = moveAngle * (Math.PI / 180);		//移動回転角度を設定する（ラジアンに変換）
-		this.startRadian = getAfterRadian();				//回転動作開始時の走行体の回転角度(ラジアン)を取得する
-	}
-
-    /**
-     * 旋回動作の停止判定
-     * @return	True : 旋回停止 / False ： 旋回中
-     */
-	public boolean isTurnStopped() {
-		//現在の走行体の回転角度を取得する
-		double tmpRadian = getAfterRadian();
-
-		//現在の回転角度と回転動作開始時の回転角度の差分が移動回転角度以上になった場合に回転停止と判定する
-		if (Math.abs(tmpRadian - startRadian) >= moveRadian) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-    //<--- Add 2022/06/29 T.Okado
+	//<--- Add 2022/06/29 T.Okado
 
 	//************* タスク周期間の移動距離のgetter() *************
 

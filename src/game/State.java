@@ -2,7 +2,6 @@ package game;
 
 import java.util.ArrayList;
 
-import body.Body;
 import game.activity.Activity;
 import game.guard.Guard;
 import task.Beep;
@@ -10,7 +9,6 @@ import task.Beep;
 /**
  * 競技状態クラス
  * デザインパターンのStateパターンを採用
- * @author 後藤　聡文
  *
  */
 public abstract class State {
@@ -60,7 +58,6 @@ public abstract class State {
      */
     public void doActivity(Game game) {
         if (guardList.get(index).judge()) {
-            Body.measure.resetTime();
             index++;
             if(index >= guardList.size()){
                 changeState(game);

@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 
 import body.Body;
 import game.Game;
-import game.SelfPosition.SelfPosition;
 import lejos.hardware.lcd.LCD;
 import log.Log;
 //---> Add 2022/06/21 T.Okado
@@ -39,12 +38,9 @@ public class TaskManager {
 	//<--- Modify 2022/06/20 T.Okado
 
 	//---> Add 2022/06/20 T.Okado
-    // 自己位置推定クラス
-    private SelfPosition selfPos;
     // 自己位置推定ログクラス
     private LogSelfPosition logSelfPos;
 	//<--- Add 2022/06/20 T.Okado
-
 
     // スケジューラ
     private ScheduledExecutorService scheduler;
@@ -77,7 +73,7 @@ public class TaskManager {
 		logSelfPos = new LogSelfPosition(game, Body.selfPos);
 		//<--- Modify 2022/06/29 T.Okado
 
-		 //---> Modify 2022/06/29 T.Okado
+        //---> Modify 2022/06/29 T.Okado
         //gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
         gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, Body.selfPos);
         //<--- Modify 2022/06/29 T.Okado
@@ -126,6 +122,5 @@ public class TaskManager {
         }
         scheduler.shutdownNow();
         log.write();
-
     }
 }

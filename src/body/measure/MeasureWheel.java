@@ -25,7 +25,7 @@ public class MeasureWheel {
 
     /**
      * コンストラクタ
-     * @param leftMotor 左モータ
+     * @param leftMotor  左モータ
      * @param rightMotor 右モータ
      */
     public MeasureWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
@@ -39,6 +39,10 @@ public class MeasureWheel {
     public void update() {
         leftRotationSpeed = leftMotor.getRotationSpeed();
         rightRotationSpeed = rightMotor.getRotationSpeed();
+        //---> Add 2022/06/20 T.Okado
+        anglePosL = leftMotor.getPosition() ;	//左モータの現在位置の角度
+        anglePosR = rightMotor.getPosition() ;	//右モータの現在位置の角度
+        //<--- Add 2022/06/20 T.Okado
     }
 
     /**
@@ -74,5 +78,6 @@ public class MeasureWheel {
 		return anglePosR;
     }
     //<--- Add 2022/06/20 T.Okado
+
 
 }
