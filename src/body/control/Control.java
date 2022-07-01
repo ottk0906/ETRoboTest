@@ -11,20 +11,26 @@ import body.Body;
 public class Control {
     /** 車輪制御 */
     ControlWheel controlWheel;
-    
+
+	/**  アーム制御 */
+	ControlArm controlArm;
+
     /** 目標速度(mm/秒) */
     private float forward;
     /** 目標回転角速度(度/秒) */
     private float turn;
-    
-    /**
-     * コンストラクタ
-     * @param controlWheel 車輪制御
-     */
-    public Control(ControlWheel controlWheel) {
-        this.controlWheel = controlWheel;
-    }
-    
+
+    private float armRotationSpeed;
+
+	/**
+	 * コンストラクタ
+	 * @param controlWheel 車輪制御
+	 */
+	public Control(ControlWheel controlWheel, ControlArm controlArm) {
+		this.controlWheel = controlWheel;
+		this.controlArm = controlArm;
+	}
+
     /**
      * 制御する
      * 目標速度(mm/秒)と目標回転角速度(度/秒)から
@@ -32,13 +38,15 @@ public class Control {
      */
     public void run(){
         turn = (float)Math.toRadians(turn);
-        
+
         float leftRotationSpeed = (float) Math.toDegrees((2.0f * forward - Body.TREAD * turn) / Body.DIAMETER);
         float rightRotationSpeed = (float) Math.toDegrees((2.0f * forward + Body.TREAD * turn) / Body.DIAMETER);
-        
+
         controlWheel.setLeftRotationSpeed(leftRotationSpeed);
         controlWheel.setRightRotationSpeed(rightRotationSpeed);
+        controlArm.setArmRotationSpeed(this.armRotationSpeed);
         controlWheel.run();
+        controlArm.run();
     }
 
     /**
@@ -56,4 +64,13 @@ public class Control {
     public void setTurn(float turn) {
         this.turn = turn;
     }
+
+	/**
+	 * 目標回転角速度(度/秒)を設定する
+	 * @param armRotationSpeed 目標回転角速度
+	 */
+	public void setArmRotationSpeed(float armRotationSpeed) {
+		this.armRotationSpeed = armRotationSpeed;
+
+	}
 }

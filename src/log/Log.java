@@ -19,7 +19,7 @@ import lejos.hardware.lcd.LCD;
 public class Log {
     /** 競技 */
     Game game;
-    
+
     /** ログデータリスト */
     private List<LogData> logList;
 
@@ -63,6 +63,8 @@ public class Log {
         LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 4);
         LCD.drawString("Value", 0, 5);
         LCD.drawString(Float.toString(Body.measure.getValue()), 11, 5);
+        LCD.drawString("Degress", 0, 6);
+        LCD.drawString(Float.toString(Body.measure.getDegrees()), 11, 6);
     }
 
     /**
