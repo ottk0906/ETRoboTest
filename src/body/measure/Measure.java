@@ -118,14 +118,6 @@ public class Measure {
 		return measureCourse.getValue();
 	}
 
-    /**
-     * アームモータの角度を計測する
-     * @return armDegrees アームモータの角度
-     */
-    public float getDegrees() {
-        return measureArm.getDegrees();
-    }
-
 	/**
 	 * 左モータの角速度(度/秒)を計測する
 	 * @return leftRotationSpeed　左モータの角速度(度/秒)
@@ -141,6 +133,14 @@ public class Measure {
 	public float getRightRotationSpeed() {
 	    return measureWheel.getRightRotationSpeed();
 	}
+
+    /**
+     * アームモータの角度を計測する
+     * @return armDegrees アームモータの角度
+     */
+    public float getDegrees() {
+        return measureArm.getDegrees();
+    }
 
 }
 

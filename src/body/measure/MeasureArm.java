@@ -22,15 +22,15 @@ public class MeasureArm {
     }
 
     /**
-     * 更新する
+     * アームモータの角度を更新する
      */
     public void update() {
         armDegrees = armMotor.getPosition();
     }
 
     /**
-     *
-     * @return
+     *アームモータの角度を渡す
+     * armDegrees アームモータの角度
      */
     public float getDegrees() {
         return armDegrees;

@@ -55,13 +55,13 @@ public class Log {
     private void draw() {
         LCD.clear();
         LCD.drawString(game.toString(), 0, 0);
-        LCD.drawString("White", 0, 2);
-        LCD.drawString(Float.toString(Body.measure.getWhite()), 11, 2);
-        LCD.drawString("Black", 0, 3);
-        LCD.drawString(Float.toString(Body.measure.getBlack()), 11, 3);
-        LCD.drawString("Target", 0, 4);
-        LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 4);
-        LCD.drawString("Value", 0, 5);
+//        LCD.drawString("White", 0, 2);
+        LCD.drawString(Float.toString(Body.control.getArmRotationSpeed()), 11, 2);
+//        LCD.drawString("Black", 0, 3);
+//        LCD.drawString(Float.toString(Body.measure.getBlack()), 11, 3);
+//        LCD.drawString("Target", 0, 4);
+//        LCD.drawString(Float.toString(Body.measure.getTarget()), 11, 4);
+//        LCD.drawString("Value", 0, 5);
         LCD.drawString(Float.toString(Body.measure.getValue()), 11, 5);
         LCD.drawString("Degress", 0, 6);
         LCD.drawString(Float.toString(Body.measure.getDegrees()), 11, 6);

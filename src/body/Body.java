@@ -26,11 +26,11 @@ public final class Body {
     public static final Control control;
 
     /** 車輪の半径(mm) */
-    public static final float RADIUS = 40.5f;
+    public static final float RADIUS = 51.0f;
     /** 車輪の直径(mm) */
     public static final float DIAMETER = 2.0f * RADIUS;
     /** 左右動輪の間隔(mm) */
-    public static final float TREAD = 128.0f;
+    public static final float TREAD = 147.0f;
 
     static {
 
