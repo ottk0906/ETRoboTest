@@ -75,7 +75,7 @@ public class Control {
 	}
 
 	/**
-	 * ログ用
+	 * アームモータの速度を渡す
 	 * @return アームモータの速度
 	 */
 	public float getArmRotationSpeed() {

@@ -4,15 +4,17 @@ import body.Body;
 
 public class GuardDegrees extends Guard {
 
-	private float targetDegrees; //目標回転角度
+	private float lowerTargetDegrees; //下限目標角度
+	private float upperTargetDegrees; //上限目標角度
 
 	/**
 	 * コンストラクタ
 	 * @param targetDegrees	目標角度
 	 */
-	public GuardDegrees(float targetDegrees) {
+	public GuardDegrees(float lowerTargetDegrees, float upperTargetDegrees) {
 		//アームモータの目標角度を設定する
-		this.targetDegrees = targetDegrees;
+		this.lowerTargetDegrees = lowerTargetDegrees;
+		this.upperTargetDegrees = upperTargetDegrees;
 	}
 
 	/**
@@ -23,13 +25,7 @@ public class GuardDegrees extends Guard {
 	public boolean judge() {
 		//現在の走行体の角度を取得する
 		float tmpDegrees = Body.measure.getDegrees();
-		//目標角度の±0.1度を設定、要検討
-		return (tmpDegrees <= targetDegrees + 0.10f && tmpDegrees >= targetDegrees - 0.10f);
-
-//		if (tmpDegrees <= targetDegrees + 0.10f && tmpDegrees >= targetDegrees - 0.10f) {
-//			return true;
-//		} else {
-//			return false;
-//		}
+		//目標角度の下限と上限の設定
+		return (tmpDegrees >= lowerTargetDegrees && tmpDegrees <= upperTargetDegrees);
 	}
 }

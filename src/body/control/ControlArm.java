@@ -64,8 +64,6 @@ public class ControlArm {
 	public void calcArmRotationSpeed() {
 		float p, i, d;
 		// 現在の角度を取得する
-//		float tmpDegrees = Body.measure.getDegrees();
-
 		float tmpDegrees =armMotor.getPosition();
 
 		//操作量を計算する
@@ -81,7 +79,7 @@ public class ControlArm {
 	}
 
 	/**
-	 * ログ用
+	 * アームモータの速度を渡す
 	 * @return armRotationSpeed アームモータの速度
 	 */
 	public float getArmRotationSpeed() {
