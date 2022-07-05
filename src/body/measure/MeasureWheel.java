@@ -12,28 +12,37 @@ public class MeasureWheel {
     private KamogawaRegulatedMotor leftMotor;
     /** 右モータ */
     private KamogawaRegulatedMotor rightMotor;
-    
+
     /** 左モータの角速度(度/秒) */
     private float leftRotationSpeed;
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
-    
+
+    //---> Add 2022/06/20 T.Okado
+    private float anglePosL;		//左モータの現在位置の角度
+    private float anglePosR;		//右モータの現在位置の角度
+    //<--- Add 2022/06/20 T.Okado
+
     /**
      * コンストラクタ
-     * @param leftMotor 左モータ
-     * @param rightMotor 右モータ 
+     * @param leftMotor  左モータ
+     * @param rightMotor 右モータ
      */
     public MeasureWheel(KamogawaRegulatedMotor leftMotor, KamogawaRegulatedMotor rightMotor){
         this.leftMotor = leftMotor;
         this.rightMotor = rightMotor;
     }
-    
+
     /**
      * 更新する
      */
     public void update() {
         leftRotationSpeed = leftMotor.getRotationSpeed();
         rightRotationSpeed = rightMotor.getRotationSpeed();
+        //---> Add 2022/06/20 T.Okado
+        anglePosL = leftMotor.getPosition() ;	//左モータの現在位置の角度
+        anglePosR = rightMotor.getPosition() ;	//右モータの現在位置の角度
+        //<--- Add 2022/06/20 T.Okado
     }
 
     /**
@@ -51,5 +60,24 @@ public class MeasureWheel {
     public float getRightRotationSpeed() {
         return rightRotationSpeed;
     }
+
+    //---> Add 2022/06/20 T.Okado
+    /**
+     * 左モータの現在位置の角度を取得する
+     * @return 左モータの現在位置の角度
+     */
+    public float getLeftAnglePosition() {
+		return anglePosL;
+    }
+
+	/**
+	 * 右モータの現在位置の角度を取得する
+	 * @return 右モータの現在位置の角度
+	 */
+    public float getRightAnglePosition() {
+		return anglePosR;
+    }
+    //<--- Add 2022/06/20 T.Okado
+
 
 }

@@ -13,7 +13,18 @@ public class Measure {
 	/** 車輪計測 */
 	MeasureWheel measureWheel;
 
-	MeasureArm measureArm;
+	/**
+	 * コンストラクタ
+	 * @param measureCourse 路面計測
+	 */
+	public Measure(MeasureCourse measureCourse) {
+		this.measureCourse = measureCourse;
+	}
+
+	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse) {
+		this.measureTouch = measureTouch;
+		this.measureCourse = measureCourse;
+	}
 
 	/**
 	 * コンストラクタ
@@ -21,11 +32,10 @@ public class Measure {
 	 * @param measureCourse 路面計測
 	 * @param measureWheel 車輪計測
 	 */
-	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel, MeasureArm measureArm) {
+	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel) {
 		this.measureTouch = measureTouch;
 	    this.measureCourse = measureCourse;
 		this.measureWheel = measureWheel;
-		this.measureArm = measureArm;
 	}
 
 	/**
@@ -35,7 +45,6 @@ public class Measure {
 		measureTouch.update();
 		measureCourse.update();
 		measureWheel.update();
-		measureArm.update();
 	}
 
 	/**
@@ -98,17 +107,17 @@ public class Measure {
 	 * 路面色相を取得する
 	 * @return　色相
 	 */
-	public float getHue(){
+	/*public float getHue(){
 	    return measureCourse.getHue();
-	}
+	}*/
 
 	/**
 	 * 路面彩度を取得する
 	 * @return　彩度
 	 */
-	public float getSaturation(){
+	/*public float getSaturation(){
 	    return measureCourse.getSaturation();
-	}
+	}*/
 
 	/**
 	 * 路面明度を取得する
@@ -122,25 +131,34 @@ public class Measure {
 	 * 左モータの角速度(度/秒)を計測する
 	 * @return leftRotationSpeed　左モータの角速度(度/秒)
 	 */
-	public float getLeftRotationSpeed() {
+	/*public float getLeftRotationSpeed() {
 	    return measureWheel.getLeftRotationSpeed();
-	}
+	}*/
 
 	/**
 	 * 右モータの角速度(度/秒)を計測する
 	 * @return rightRotationSpeed　右モータの角速度(度/秒)
 	 */
-	public float getRightRotationSpeed() {
+	/*public float getRightRotationSpeed() {
 	    return measureWheel.getRightRotationSpeed();
-	}
+	}*/
 
+    //---> Add 2022/06/20 T.Okado
     /**
-     * アームモータの角度を計測する
-     * @return armDegrees アームモータの角度
+     * 左モータの現在位置の角度を取得する
+     * @return 左モータの現在位置の角度
      */
-    public float getDegrees() {
-        return measureArm.getDegrees();
+    public float getLeftAnglePosition() {
+		return measureWheel.getLeftAnglePosition();
     }
 
-}
+    /**
+	 * 右モータの現在位置の角度を取得する
+	 * @return 右モータの現在位置の角度
+	 */
+    public float getRightAnglePosition() {
+		return measureWheel.getRightAnglePosition();
+    }
+    //<--- Add 2022/06/20 T.Okado
 
+}

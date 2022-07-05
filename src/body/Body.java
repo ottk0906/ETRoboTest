@@ -1,10 +1,8 @@
 package body;
 
 import body.control.Control;
-import body.control.ControlArm;
 import body.control.ControlWheel;
 import body.measure.Measure;
-import body.measure.MeasureArm;
 import body.measure.MeasureCourse;
 import body.measure.MeasureTouch;
 import body.measure.MeasureWheel;
@@ -17,7 +15,6 @@ import lejos.hardware.sensor.EV3TouchSensor;
 
 /**
  * 走行体クラス
- * @author 後藤　聡文
  *
  */
 public final class Body {
@@ -25,10 +22,10 @@ public final class Body {
     public static final Measure measure;
     /** 制御 */
     public static final Control control;
-    	//---> Add 2022/06/29 T.Okado
+	//---> Add 2022/06/29 T.Okado
     // 自己位置推定クラス
     public static final SelfPosition selfPos;
-	    //<--- Add 2022/06/29 T.Okado
+	//<--- Add 2022/06/29 T.Okado
 
     /** 車輪の半径(mm) */
     public static final float RADIUS = 50.0f;
@@ -43,7 +40,7 @@ public final class Body {
 
     static {
 
-         // ハードウェアの初期化
+        // ハードウェアの初期化
 		EV3TouchSensor touchSensor = new EV3TouchSensor(SensorPort.S1);
         EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S2);
 		KamogawaRegulatedMotor leftMotor = new KamogawaRegulatedMotor(MotorPort.C);
@@ -71,4 +68,5 @@ public final class Body {
     private Body(){
 
     }
+
 }
