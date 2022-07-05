@@ -37,16 +37,14 @@ public class Game {
         StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-        //---> Modify 2022/06/22 T.Okado
+        //---> Modify 2022/07/05 T.Okado
         //StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 900f , 0.01f , 0.01f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 45.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , -45.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(200.0f , 0.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(-200.0f , 0.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityRunOnOff(200, 100.0f));
-        //<--- Modify 2022/06/22 T.Okado
 
-        //---> Add 2022/06/29 T.Okado
         StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , 200.0f));
         StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityTurnTest(200.0f , 0.0f));
         StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , -200.0f));
@@ -55,7 +53,7 @@ public class Game {
         //StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunOnOff(200, 100.0f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityTurnTest(200.0f , 0.0f));
-        //<--- Add 2022/06/29 T.Okado
+        //<--- Modify 2022/07/05 T.Okado
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
@@ -110,7 +108,6 @@ public class Game {
         return isOver;
     }
 
-    //---> Add 2022/06/20 T.Okado
     /**
      * 現在の競技状態を取得する
      * @return 現在の競技状態
@@ -118,7 +115,6 @@ public class Game {
     public State getStatus() {
     	return state;
     }
-    //<--- Add 2022/06/20 T.Okado
 
     /**
      * オブジェクトの文字列表現を取得する
