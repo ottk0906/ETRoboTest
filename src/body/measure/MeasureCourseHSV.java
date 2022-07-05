@@ -1,32 +1,25 @@
 package body.measure;
 
-import lejos.hardware.sensor.EV3ColorSensor;;
+import body.Body;
 
 public class MeasureCourseHSV extends MeasureCourseHue {
-
-	/** hsv（色相:Hue、彩度:Saturation、明度:Value）*/
-	private float hue, saturation, value;
-
-	public MeasureCourseHSV(EV3ColorSensor colorSensor) {
-		super(colorSensor);
-		//仮設定
-		hue = saturation = value = -2.0f;
-	}
-
+	/** sv（彩度:Saturation、明度:Value）*/
+	private float saturation, value;
 
 	/**
-	 * 色相を取得する
-	 * @return hue 色相
+	 * コンストラクタ
 	 */
-	float getHueHSV() {
-		return hue;
+	public MeasureCourseHSV() {
+		//仮設定
+		setHue(-2.0f);
+		saturation = value = -2.0f;
 	}
 
 	/**
 	 * 彩度を取得する
 	 * @return saturation 彩度
 	 */
-	float getSaturationHSV() {
+	float getSaturation() {
 		return saturation;
 	}
 
@@ -34,8 +27,20 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 	 * 明度を取得する
 	 * @return value 輝度
 	 */
-	float getValueHSV() {
+	float getValue() {
 		return value;
+	}
+
+	public void update() {
+		convertRGBTo(Body.measure.getRGB());
+		judgeColor();
+	}
+
+	/**
+	 * 色判定結果を設定する
+	 */
+	public void judgeColor() {
+		setColor(judgeColor.judgeColorHSV(getHue(), saturation, value));
 	}
 
 	/**
@@ -78,10 +83,14 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 				min = r;
 			}
 		}
+
+		//色相設定用変数
+		float hue;
+
 		// rgbからhsvへ変換
 		if (max == min) {
 			hue = -1.0f;
-			if(max == 0) {
+			if (max == 0) {
 				saturation = -1.0f;
 			}
 		} else {
@@ -95,9 +104,10 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 			}
 			if (hue < 0.0f) {
 				hue = hue + 360.0f;
-			}else if (hue > 360.0f) {
+			} else if (hue > 360.0f) {
 				hue = hue - 360.0f;
 			}
+			setHue(hue);
 
 			/* s設定部分 */
 			saturation = (max - min) / max;
@@ -105,18 +115,17 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 		value = max;
 	}
 
-
 	/**
-	 * 色をHSVで判定する
-	 * @return 色
+	 * 色を判定するクラスの生成
+	 * 色を判別するときの上限下限値を設定する
+	 * @param borderRedToYellow		赤色上限値、黄色下限値
+	 * @param borderYellowToGreen	黄色上限値、緑色下限値
+	 * @param borderGreenToBlue		緑色上限値、青色下限値
+	 * @param borderBlueToRed		青色上限値、赤色下限値
 	 */
-	Color judgeColorHSV() {
-
-		if(value >= getLimitWhite()) {
-			return Color.White;
-		}else if(value <= getLimitBlack()) {
-			return Color.Black;
-		}
-		return judgeColorHue();
+	void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
+			float borderBlueToRed) {
+		setJudgeColor(new JudgeColor(borderRedToYellow, borderYellowToGreen,
+				borderGreenToBlue, borderBlueToRed));
 	}
 }

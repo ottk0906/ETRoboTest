@@ -178,6 +178,10 @@ public class MeasureCourse{
 		hsv[2] = v;
     }
 
+    /**
+     * RGB値を取得する
+     * @return rgb (Red,Green,Blue)
+     */
     float[] getRGB() {
     	return rgb;
     }

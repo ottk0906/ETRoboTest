@@ -12,5 +12,6 @@ public enum Color {
 	Red,
 	Yellow,
 	Green,
-	Blue;
+	Blue,
+	Other;
 }

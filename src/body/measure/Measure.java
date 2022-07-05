@@ -55,18 +55,26 @@ public class Measure {
 	 * @param measureCourseHSL 路面計測HSL
 	 */
 	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureCourseHSV measureCourseHSV, MeasureCourseHSL measureCourseHSL) {
-		this.measureTouch = measureTouch;
-		this.measureCourse = measureCourse;
+		this(measureTouch,measureCourse);
 		this.measureCourseHSV = measureCourseHSV;
 		this.measureCourseHSL = measureCourseHSL;
 	}
+
+	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureCourseHSV measureCourseHSV,MeasureCourseHSL measureCourseHSL, MeasureWheel measureWheel) {
+		this(measureTouch,measureCourse,measureCourseHSV,measureCourseHSL);
+		this.measureWheel = measureWheel;
+	}
+
 	/**
 	 * 更新する
 	 */
 	public void update() {
 		measureTouch.update();
 		measureCourse.update();
-		/*measureWheel.update();*/
+		measureCourseHSV.update();
+		measureCourseHSL.update();
+
+		measureWheel.update();
 	}
 
 	/**
@@ -192,9 +200,9 @@ public class Measure {
 	 * @param borderGreenToBlue
 	 * @param borderBlueToRed
 	 */
-	public void setColorLimit(float borderWhiteToColor, float borderBlackToColor,float borderRedToYellow, float borderYellowToGreen,float borderGreenToBlue, float borderBlueToRed) {
-		measureCourseHSV.setColorLimit(borderWhiteToColor, borderBlackToColor, borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
-		measureCourseHSL.setColorLimit(borderWhiteToColor, borderBlackToColor, borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+	public void setColorBorder(float borderRedToYellow, float borderYellowToGreen,float borderGreenToBlue, float borderBlueToRed) {
+		measureCourseHSV.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+		measureCourseHSL.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 	}
 
 	/**
@@ -202,15 +210,7 @@ public class Measure {
 	 * @return hue
 	 */
 	public float getHueHSV() {
-		return measureCourseHSV.getHueHSV();
-	}
-
-	/**
-	 * HSLクラスの色相を取得する
-	 * @return hue
-	 */
-	public float getHueHSL() {
-		return measureCourseHSL.getHueHSL();
+		return measureCourseHSV.getHue();
 	}
 
 	/**
@@ -218,7 +218,31 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSV() {
-		return measureCourseHSV.getSaturationHSV();
+		return measureCourseHSV.getSaturation();
+	}
+
+	/**
+	 * HSVクラスの明度を取得する
+	 * @return value
+	 */
+	public float getValueHSV() {
+		return measureCourseHSV.getValue();
+	}
+
+	/**
+	 * HSVクラスの色判定結果を取得する
+	 * @return
+	 */
+	public Color getColorHSV() {
+		return measureCourseHSV.getColor();
+	}
+
+	/**
+	 * HSLクラスの色相を取得する
+	 * @return hue
+	 */
+	public float getHueHSL() {
+		return measureCourseHSL.getHue();
 	}
 
 	/**
@@ -226,14 +250,7 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSL() {
-		return measureCourseHSL.getSatuationHSL();
-	}
-	/**
-	 * HSVクラスの明度を取得する
-	 * @return value
-	 */
-	public float getValueHSV() {
-		return measureCourseHSV.getValueHSV();
+		return measureCourseHSL.getSatuation();
 	}
 
 	/**
@@ -241,22 +258,14 @@ public class Measure {
 	 * @return
 	 */
 	public float getLightnessHSL() {
-		return measureCourseHSL.getLightnessHSL();
+		return measureCourseHSL.getLightness();
 	}
 
 	/**
-	 * 色をHSVで判定する
-	 * @return 色
+	 * HSLクラスの色判定結果を取得する
+	 * @return
 	 */
-	public Color judgeColorHSV() {
-		return measureCourseHSV.judgeColorHSV();
-	}
-
-	/**
-	 * 色をHSLで判定する
-	 * @return　色
-	 */
-	public Color judgeColorHSL() {
-		return measureCourseHSL.judgeColorHSL();
+	public Color getColorHSL() {
+		return measureCourseHSL.getColor();
 	}
 }

@@ -1,6 +1,8 @@
 package game;
 
 import game.activity.ActivityAcquisitionColor;
+import game.activity.ActivityCalibrationBlack;
+import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
 import game.guard.GuardTouch;
 import lejos.hardware.lcd.LCD;
@@ -24,13 +26,15 @@ public class Game {
      * コンストラクタ
      */
     public Game() {
+    	StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
+    	StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
         StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
 		StateAcquisitionColor.getInstance().add(new GuardTouch(), new ActivityAcquisitionColor());
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-        changeState(null, StateWaitStart.getInstance());
+        changeState(null, StateCalibrationWhite.getInstance());
     }
 
     /**

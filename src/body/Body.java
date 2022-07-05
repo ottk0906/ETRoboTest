@@ -7,6 +7,7 @@ import body.measure.MeasureCourse;
 import body.measure.MeasureCourseHSL;
 import body.measure.MeasureCourseHSV;
 import body.measure.MeasureTouch;
+import body.measure.MeasureWheel;
 import hardware.KamogawaRegulatedMotor;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.MotorPort;
@@ -44,12 +45,12 @@ public final class Body {
         // 計測の初期化
 		MeasureTouch measureTouch = new MeasureTouch(touchSensor);
         MeasureCourse measureCourse = new MeasureCourse(colorSensor);
-        MeasureCourseHSV measureCourseHSV = new MeasureCourseHSV(colorSensor);
-        MeasureCourseHSL measureCourseHSL = new MeasureCourseHSL(colorSensor);
-		/*MeasureWheel measureWheel = new MeasureWheel(leftMotor, rightMotor);*/
+        MeasureCourseHSV measureCourseHSV = new MeasureCourseHSV();
+        MeasureCourseHSL measureCourseHSL = new MeasureCourseHSL();
+		MeasureWheel measureWheel = new MeasureWheel(leftMotor, rightMotor);
 		/*measure = new Measure(measureTouch, measureCourse, measureWheel);*/
 		/*measure = new Measure(measureTouch, measureCourse);*/
-        measure = new Measure(measureTouch, measureCourse, measureCourseHSV, measureCourseHSL);
+        measure = new Measure(measureTouch, measureCourse, measureCourseHSV, measureCourseHSL, measureWheel);
         // 制御の初期化
 		ControlWheel controlWheel = new ControlWheel(leftMotor, rightMotor);
 		control = new Control(controlWheel);

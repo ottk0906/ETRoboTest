@@ -36,8 +36,8 @@ public class Log {
      *　実行する
      */
     public void run() {
-		/*draw();*/
-		/*add();*/
+		draw();
+		add();
     }
 
     /**

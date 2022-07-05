@@ -8,22 +8,22 @@ import body.Body;
  *
  */
 public class ActivityCalibrationWhite extends Activity{
-    
+
     /**
      * コンストラクタ
      */
     public ActivityCalibrationWhite(){
 
     }
-    
+
     /**
      * 継続動作を実行する
      */
     @Override
     public void doActivity(){
-        
+
     }
-    
+
     /**
      * 後動作を実行する
      * 白明度を設定する
