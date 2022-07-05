@@ -32,9 +32,9 @@ public class Game {
 
 		StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
-		StateRun.getInstance().add(new GuardDegrees(29.90f, 30.10f), new ActivityArm(30.0f));
+		StateRun.getInstance().add(new GuardDegrees(30.0f, 0.10f), new ActivityArm(30.0f));
 		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
-		StateRun.getInstance().add(new GuardDegrees(-0.10f, 0.10f), new ActivityArm(0.0f));
+		StateRun.getInstance().add(new GuardDegrees(0.0f, 0.10f), new ActivityArm(0.0f));
 		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
 		StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
