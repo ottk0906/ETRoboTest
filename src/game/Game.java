@@ -6,6 +6,7 @@ import game.activity.ActivityArm;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
+import game.activity.ActivityRunPID;
 import game.activity.ActivityTurnTest;
 import game.guard.GuardDegrees;
 import game.guard.GuardDistanceStop;
@@ -38,9 +39,18 @@ public class Game {
 		StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
 		StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
 		StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+
+		//---> Modify 2022/07/06 Harada
+		StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
+		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+		//<--- Modify 2022/07/06 Harada
+
+		//---> Modify 2022/07/05 Komai
 		StateRun.getInstance().add(new GuardDegrees(30.0f, 1.0f), new ActivityArm(30.0f));
+		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 		StateRun.getInstance().add(new GuardDegrees(0.0f, 1.0f), new ActivityArm(0.0f));
 		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+		//<--- Modify 2022/07/05 Komai
 
 		//---> Modify 2022/06/22 T.Okado
 		//StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 900f , 0.01f , 0.01f));
