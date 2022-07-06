@@ -123,6 +123,14 @@ public class MeasureCourse {
 	}
 
 	/**
+     * RGB値を取得する
+     * @return rgb (Red,Green,Blue)
+     */
+    float[] getRGB() {
+    	return rgb;
+    }
+
+	/**
 	 * RGBをHSVに変換する
 	 */
 	private void convertRGBtoHSV(float[] rgb) {

@@ -4,7 +4,7 @@ import body.Body;
 
 /**
  * PID走行クラス
- *
+ *@author 原田　寛大
  */
 public class ActivityRunPID extends ActivityRun {
 	/** 処理周期 */

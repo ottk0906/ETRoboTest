@@ -6,6 +6,8 @@ import body.control.ControlWheel;
 import body.measure.Measure;
 import body.measure.MeasureArm;
 import body.measure.MeasureCourse;
+import body.measure.MeasureCourseHSL;
+import body.measure.MeasureCourseHSV;
 import body.measure.MeasureTouch;
 import body.measure.MeasureWheel;
 import game.SelfPosition.SelfPosition;
@@ -54,7 +56,9 @@ public final class Body {
 		MeasureCourse measureCourse = new MeasureCourse(colorSensor);
 		MeasureWheel measureWheel = new MeasureWheel(leftMotor, rightMotor);
 		MeasureArm measureArm = new MeasureArm(armMotor);
-		measure = new Measure(measureTouch, measureCourse, measureWheel, measureArm);
+		MeasureCourseHSV measureCourseHSV = new MeasureCourseHSV();
+        MeasureCourseHSL measureCourseHSL = new MeasureCourseHSL();
+		measure = new Measure(measureTouch, measureCourse, measureWheel, measureArm, measureCourseHSV, measureCourseHSL);
 		// 制御の初期化
 		ControlWheel controlWheel = new ControlWheel(leftMotor, rightMotor);
 		ControlArm controlArm = new ControlArm(armMotor);

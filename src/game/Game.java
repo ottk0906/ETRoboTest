@@ -2,6 +2,7 @@ package game;
 
 import body.control.Control;
 import body.measure.Measure;
+import game.activity.ActivityAcquisitionColor;
 import game.activity.ActivityArm;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
@@ -41,7 +42,12 @@ public class Game {
 		StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
 		//---> Modify 2022/07/06 Harada
-		StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
+		StateRun.getInstance().add(new GuardTouch(), new ActivityAcquisitionColor());
+		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+		//<--- Modify 2022/07/06 Harada
+
+		//---> Modify 2022/07/06 Harada
+		StateRun.getInstance().add(new GuardTouch(), new ActivityRunPID(200, 0.0f, 1500f, 0.01f, 0.01f));
 		StateRun.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 		//<--- Modify 2022/07/06 Harada
 
@@ -98,7 +104,7 @@ public class Game {
 	 * @return タスク呼出回数
 	 */
 	public int getCount() {
-	    return count;
+		return count;
 	}
 
 	/**
@@ -114,7 +120,6 @@ public class Game {
 		}
 		if (newState != null) {
 			newState.entryAction();
-			;
 		}
 	}
 
