@@ -4,7 +4,7 @@ import body.measure.Color;
 
 /**
  * HSVログデータクラス
- * @author 原田
+ * @author 原田　寛大
  */
 public class LogHSVData {
 	/** タスク呼び出し回数 */
