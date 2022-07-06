@@ -12,6 +12,8 @@ public class Measure {
 	MeasureCourse measureCourse;
 	/** 車輪計測 */
 	MeasureWheel measureWheel;
+	/** アーム制御 */
+	MeasureArm measureArm;
 
 	/**
 	 * コンストラクタ
@@ -21,6 +23,11 @@ public class Measure {
 		this.measureCourse = measureCourse;
 	}
 
+	/**
+	 * コンストラクタ
+	 * @param measureTouch
+	 * @param measureCourse
+	 */
 	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse) {
 		this.measureTouch = measureTouch;
 		this.measureCourse = measureCourse;
@@ -34,8 +41,23 @@ public class Measure {
 	 */
 	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel) {
 		this.measureTouch = measureTouch;
-	    this.measureCourse = measureCourse;
+		this.measureCourse = measureCourse;
 		this.measureWheel = measureWheel;
+	}
+
+	/**
+	 * コンストラクタ
+	 * @param measureTouch タッチ計測
+	 * @param measureCourse 路面計測
+	 * @param measureWheel 車輪計測
+	 * @param measureArm アーム計測
+	 */
+	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel,
+			MeasureArm measureArm) {
+		this.measureTouch = measureTouch;
+		this.measureCourse = measureCourse;
+		this.measureWheel = measureWheel;
+		this.measureArm = measureArm;
 	}
 
 	/**
@@ -45,6 +67,7 @@ public class Measure {
 		measureTouch.update();
 		measureCourse.update();
 		measureWheel.update();
+		measureArm.update();
 	}
 
 	/**
@@ -52,7 +75,7 @@ public class Measure {
 	 * @return タッチセンサが離された場合はtrue
 	 */
 	public boolean isUpped() {
-	    return measureTouch.isUpped();
+		return measureTouch.isUpped();
 	}
 
 	/**
@@ -143,22 +166,30 @@ public class Measure {
 	    return measureWheel.getRightRotationSpeed();
 	}*/
 
-    //---> Add 2022/06/20 T.Okado
-    /**
-     * 左モータの現在位置の角度を取得する
-     * @return 左モータの現在位置の角度
-     */
-    public float getLeftAnglePosition() {
+	//---> Add 2022/06/20 T.Okado
+	/**
+	 * 左モータの現在位置の角度を取得する
+	 * @return 左モータの現在位置の角度
+	 */
+	public float getLeftAnglePosition() {
 		return measureWheel.getLeftAnglePosition();
-    }
+	}
 
-    /**
+	/**
 	 * 右モータの現在位置の角度を取得する
 	 * @return 右モータの現在位置の角度
 	 */
-    public float getRightAnglePosition() {
+	public float getRightAnglePosition() {
 		return measureWheel.getRightAnglePosition();
-    }
-    //<--- Add 2022/06/20 T.Okado
+	}
+	//<--- Add 2022/06/20 T.Okado
+
+	/**
+	 * アームモータの角度を計測する
+	 * @return armDegrees アームモータの角度
+	 */
+	public float getDegrees() {
+		return measureArm.getDegrees();
+	}
 
 }

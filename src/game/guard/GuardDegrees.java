@@ -1,7 +1,10 @@
 package game.guard;
 
 import body.Body;
-
+/**
+ * 角度遷移条件
+ * @author user206
+ */
 public class GuardDegrees extends Guard {
 
 	private float targetDegrees; //目標角度

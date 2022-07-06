@@ -3,15 +3,16 @@ package body.control;
 import hardware.KamogawaRegulatedMotor;
 
 /**
- * 車輪制御クラス
+ * アーム制御クラス
+ * @author 駒井
  *
  */
 public class ControlArm {
-
+	/**  アームモータ */
 	private KamogawaRegulatedMotor armMotor;
-
+	/**  目標角度 */
 	private float targetDegrees;
-
+	/** アーム回転角速度 */
 	private float armRotationSpeed;
 
 	/**処理周期*/
@@ -30,8 +31,7 @@ public class ControlArm {
 
 	/**
 	 * コンストラクタ
-	 * @param leftMotor 左モータ
-	 * @param rightMotor　右モータ
+	 * @param armMotor アームモータ
 	 */
 	public ControlArm(KamogawaRegulatedMotor armMotor) {
 		this.armMotor = armMotor;
