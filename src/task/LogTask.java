@@ -6,7 +6,7 @@ import log.LogSelfPosition;
 
 /**
  * ログタスククラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class LogTask extends Thread {

@@ -16,7 +16,7 @@ import log.LogSelfPosition;
 
 /**
  * タスク管理クラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class TaskManager {

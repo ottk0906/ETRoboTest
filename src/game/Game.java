@@ -23,7 +23,7 @@ public class Game {
 	private Control control;
 
 	/** タスク呼出回数 */
-	/*private int count = 0;*/
+	private int count = 0;
 
 	/** 競技状態 */
 	private State state;
@@ -72,7 +72,7 @@ public class Game {
 	 */
 	public void run() {
 		if (isOver == false) {
-			/*count++;*/
+			count++;
 			if (state instanceof StateEnd) {
 				isOver = true;
 			} else {
@@ -87,9 +87,9 @@ public class Game {
 	 * タスク呼出回数を取得する
 	 * @return タスク呼出回数
 	 */
-	/*public int getCount() {
+	public int getCount() {
 	    return count;
-	}*/
+	}
 
 	/**
 	 * 競技状態を遷移する

@@ -2,7 +2,7 @@ package log;
 
 /**
  * ログデータクラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class LogData {
@@ -21,9 +21,13 @@ public class LogData {
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
 
-
+    /**
+     * コンストラクタ
+     * @param statusName
+     * @param value
+     */
     public LogData(String statusName, float value) {
-    	this.statusName = this.statusName;
+    	this.statusName = statusName;
     	this.value = value;
     }
 

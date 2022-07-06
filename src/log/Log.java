@@ -13,7 +13,7 @@ import lejos.hardware.lcd.LCD;
 
 /**
  * ログクラス
- * @author 後藤 聡文
+ * @author
  *
  */
 public class Log {

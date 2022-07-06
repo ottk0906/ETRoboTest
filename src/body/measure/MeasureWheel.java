@@ -4,7 +4,7 @@ import hardware.KamogawaRegulatedMotor;
 
 /**
  * 車輪計測クラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class MeasureWheel {
