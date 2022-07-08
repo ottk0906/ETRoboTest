@@ -26,10 +26,10 @@ public final class Body {
 	public static final Measure measure;
 	/** 制御 */
 	public static final Control control;
-	//---> Add 2022/06/29 T.Okado
 	// 自己位置推定クラス
 	public static final SelfPosition selfPos;
-	//<--- Add 2022/06/29 T.Okado
+    /** ストップウォッチクラス	*/
+	public static final Stopwatch stopwatch;
 
 	/** 車輪の半径(mm) */
 	public static final float RADIUS = 50.0f;
@@ -37,10 +37,8 @@ public final class Body {
 	public static final float DIAMETER = 2.0f * RADIUS;
 	/** 左右動輪の間隔(mm) */
 	public static final float TREAD = 147.0f;
-	//---> Add 2022/06/20 T.Okado
 	/** 車輪の円周(mm) */
 	public static final float CIRCLE = 320.0f;
-	//<--- Add 2022/06/20 T.Okado
 
 	static {
 
@@ -63,11 +61,12 @@ public final class Body {
 		ControlWheel controlWheel = new ControlWheel(leftMotor, rightMotor);
 		ControlArm controlArm = new ControlArm(armMotor);
 		control = new Control(controlWheel, controlArm);
-
-		//---> Add 2022/06/29 T.Okado
 		// 自己位置推定クラス
 		selfPos = new SelfPosition();
-		//<--- Add 2022/06/29 T.Okado
+	    //ストップウォッチクラスを生成する
+	    stopwatch = new Stopwatch();
+	    //ストップウォッチのカウンタをリセットする
+	    stopwatch.reset();
 
 	}
 
