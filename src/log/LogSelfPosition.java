@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import body.Body;
 import game.Game;
 import game.StateRun;
 import game.SelfPosition.SelfPosition;
@@ -80,7 +81,8 @@ public class LogSelfPosition {
         		selfPos.getRightDistnce(),
         		selfPos.getDistnce(),
         		selfPos.getLeftBeforeAngle(),
-        		selfPos.getRightBeforeAngle()
+        		selfPos.getRightBeforeAngle(),
+        		Body.stopwatch.elapsed()
         	)
     	);
     }
@@ -93,8 +95,8 @@ public class LogSelfPosition {
         LCD.drawString(String.valueOf(selfPos.getXCoord()) , 11, 5);
         LCD.drawString("Y-Coord", 0, 6);
         LCD.drawString(String.valueOf(selfPos.getYCoord()), 11, 6);
-        LCD.drawString("Angle", 0, 7);
-        LCD.drawString(String.valueOf(selfPos.getAfterRadianToAngle()), 11, 7);
+        LCD.drawString("Distance", 0, 7);
+        LCD.drawString(String.valueOf(selfPos.getAccumDistance()), 11, 7);
     }
 
     /**
@@ -117,7 +119,8 @@ public class LogSelfPosition {
 	        	sb.append("RigjtWheel-Distance").append(",");
 	        	sb.append("Distance").append(",");
 	        	sb.append("LeftWheel-Angle-Past").append(",");
-	        	sb.append("RightWheel-Angle-Past").append("\r\n");
+	        	sb.append("RightWheel-Angle-Past").append(",");
+	        	sb.append("elapsedTime").append("\r\n");
         	//データ部分を出力する
             } else {
 	        	for (LogSelfPositionData data : logList) {
