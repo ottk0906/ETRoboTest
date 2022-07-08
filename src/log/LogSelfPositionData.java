@@ -18,6 +18,7 @@ public class LogSelfPositionData {
 	private double distance;			//走行体の移動距離
 	private double beforeAngleL;		//左車輪の回転角度過去値
 	private double beforeAngleR;		//右車輪の回転角度過去値
+	private int elapsedTime;			//経過時間(走行体起動時からの経過時間(ms))
 
     /**
      * コンストラクタ
@@ -33,11 +34,12 @@ public class LogSelfPositionData {
      * @param distance			走行体の移動距離
      * @param beforeAngleL		左車輪の回転角度過去値
      * @param beforeAngleR		右車輪の回転角度過去値
+     * @param elapsedTime		経過時間(走行体起動時からの経過時間(ms))
      */
 	public LogSelfPositionData(double currentX, double currentY, double currentAngle,
 								double accumDistance, double odometryX, double odometryY,
 								double odometryAngle, double distanceL, double distanceR,
-								double distance, double beforeAngleL, double beforeAngleR) {
+								double distance, double beforeAngleL, double beforeAngleR, int elapsedTime) {
 
 		this.currentX = currentX;
 		this.currentY = currentY;
@@ -51,7 +53,7 @@ public class LogSelfPositionData {
 		this.distance = distance;
 		this.beforeAngleL = beforeAngleL;
 		this.beforeAngleR = beforeAngleR;
-
+		this.elapsedTime = elapsedTime;
 	}
 
     /**
@@ -71,7 +73,8 @@ public class LogSelfPositionData {
         sb.append(distanceR).append(",");
         sb.append(distance).append(",");
         sb.append(beforeAngleL).append(",");
-        sb.append(beforeAngleR).append("\r\n");
+        sb.append(beforeAngleR).append(",");
+        sb.append(elapsedTime).append("\r\n");
         return sb.toString();
     }
 

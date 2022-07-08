@@ -5,10 +5,9 @@ import body.measure.Measure;
 import game.activity.ActivityCalibrationBlack;
 import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
-import game.activity.ActivityTurnTest;
-import game.guard.GuardDistanceStop;
+import game.activity.ActivityRunPoint;
+import game.guard.GuardPointStop;
 import game.guard.GuardTouch;
-import game.guard.GuardTurnStop;
 
 /**
  * 競技クラス
@@ -45,14 +44,35 @@ public class Game {
         //StateRun.getInstance().add(new GuardTouch(), new ActivityTurnTest(-200.0f , 0.0f));
         //StateRun.getInstance().add(new GuardTouch(), new ActivityRunOnOff(200, 100.0f));
 
-        StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , 200.0f));
-        StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityTurnTest(200.0f , 0.0f));
-        StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , -200.0f));
-        StateRun.getInstance().add(new GuardDistanceStop(1500), new ActivityTurnTest(200.0f , 0.0f));
+        //StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , 200.0f));
+        //StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityTurnTest(200.0f , 0.0f));
+        //StateRun.getInstance().add(new GuardTurnStop(180.0), new ActivityTurnTest(0.0f , -200.0f));
+        //StateRun.getInstance().add(new GuardDistanceStop(1500), new ActivityTurnTest(200.0f , 0.0f));
 
         //StateRun.getInstance().add(new GuardDistanceStop(1000), new ActivityRunPID(200, 0.0f , 1500f , 0.01f , 0.01f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityRunOnOff(200, 100.0f));
         //StateRun.getInstance().add(new GuardDistanceStop(), new ActivityTurnTest(200.0f , 0.0f));
+
+        double targetX = 0;
+        double targetY = 0;
+        double marginDist = 10;
+
+        //for(int i = 0; i < 1; i++) {
+
+        	targetX = 300;
+        	targetY = 300;
+
+	        StateRun.getInstance().add(new GuardPointStop(targetX, targetY, marginDist),
+	        							 new ActivityRunPoint(200.0f, 20.0f, targetX, targetY, 1.0));
+
+        	targetX = 310;
+        	targetY = 500;
+
+	        StateRun.getInstance().add(new GuardPointStop(targetX, targetY, marginDist),
+	        							 new ActivityRunPoint(200.0f, 20.0f, targetX, targetY, 1.0));
+        //}
+
+
         //<--- Modify 2022/07/05 T.Okado
 
         StateEnd.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));

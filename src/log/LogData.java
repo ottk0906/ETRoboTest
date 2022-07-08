@@ -21,7 +21,6 @@ public class LogData {
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
 
-
     public LogData(String statusName, float value) {
     	this.statusName = this.statusName;
     	this.value = value;
