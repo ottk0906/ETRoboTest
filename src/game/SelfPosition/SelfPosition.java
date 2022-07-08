@@ -8,7 +8,10 @@ import game.StateRun;
  * デザインパターンのSingletonパターンを採用
  * @author 尾角 武俊
  */
+//---> Modify 2022/06/29 T.Okado
+//public class SelfPosition {
 public final class SelfPosition {
+//---> Modify 2022/06/29 T.Okado
 
     /** 競技 */
     private Game game;
@@ -19,7 +22,11 @@ public final class SelfPosition {
      * コンストラクタ
      */
 
+    //---> Modify 2022/06/29 T.Okado
+	//public SelfPosition(Game game){
+	//	this.game = game;
 	public SelfPosition(){
+    //---> Modify 2022/06/29 T.Okado
 		calcSelfPos = new CalcSelfPosition();	//自己位置推定計算処理クラスのインスタンスを生成する
 	}
 
@@ -34,6 +41,7 @@ public final class SelfPosition {
 		}
 	}
 
+    //---> Add 2022/06/29 T.Okado
     /**
      * gameクラスオブジェクトを設定する
      * @param	game	gameクラスのインスタンス
@@ -41,6 +49,7 @@ public final class SelfPosition {
 	public void setGameInstance(Game game) {
 		this.game = game;
 	}
+	//<--- Add 2022/06/29 T.Okado
 
 	//************* タスク周期間の移動距離のgetter() *************
 

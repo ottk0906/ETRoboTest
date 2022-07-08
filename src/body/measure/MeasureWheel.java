@@ -4,7 +4,7 @@ import hardware.KamogawaRegulatedMotor;
 
 /**
  * 車輪計測クラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class MeasureWheel {
@@ -18,8 +18,10 @@ public class MeasureWheel {
     /** 右モータの角速度(度/秒) */
     private float rightRotationSpeed;
 
+    //---> Add 2022/06/20 T.Okado
     private float anglePosL;		//左モータの現在位置の角度
     private float anglePosR;		//右モータの現在位置の角度
+    //<--- Add 2022/06/20 T.Okado
 
     /**
      * コンストラクタ
@@ -37,8 +39,10 @@ public class MeasureWheel {
     public void update() {
         leftRotationSpeed = leftMotor.getRotationSpeed();
         rightRotationSpeed = rightMotor.getRotationSpeed();
+        //---> Add 2022/06/20 T.Okado
         anglePosL = leftMotor.getPosition() ;	//左モータの現在位置の角度
         anglePosR = rightMotor.getPosition() ;	//右モータの現在位置の角度
+        //<--- Add 2022/06/20 T.Okado
     }
 
     /**
@@ -57,6 +61,7 @@ public class MeasureWheel {
         return rightRotationSpeed;
     }
 
+    //---> Add 2022/06/20 T.Okado
     /**
      * 左モータの現在位置の角度を取得する
      * @return 左モータの現在位置の角度
@@ -72,5 +77,7 @@ public class MeasureWheel {
     public float getRightAnglePosition() {
 		return anglePosR;
     }
+    //<--- Add 2022/06/20 T.Okado
+
 
 }

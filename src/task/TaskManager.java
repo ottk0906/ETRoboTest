@@ -10,11 +10,13 @@ import body.Body;
 import game.Game;
 import lejos.hardware.lcd.LCD;
 import log.Log;
+//---> Add 2022/06/21 T.Okado
 import log.LogSelfPosition;
+//<--- Add 2022/06/21 T.Okado
 
 /**
  * タスク管理クラス
- * @author 後藤　聡文
+ * @author
  *
  */
 public class TaskManager {
@@ -22,15 +24,23 @@ public class TaskManager {
     // 競技タスク
     private GameTask gameTask;
 
+    //---> Modify 2022/06/20 T.Okado
+    //Game game;
     private Game game;
+	//<--- Modify 2022/06/20 T.Okado
 
     // ログタスク
     private LogTask logTask;
 
+    //---> Modify 2022/06/20 T.Okado
+    //Log log;
     private Log log;
+	//<--- Modify 2022/06/20 T.Okado
 
+	//---> Add 2022/06/20 T.Okado
     // 自己位置推定ログクラス
     private LogSelfPosition logSelfPos;
+	//<--- Add 2022/06/20 T.Okado
 
     // スケジューラ
     private ScheduledExecutorService scheduler;
@@ -53,13 +63,27 @@ public class TaskManager {
         game = new Game();
         log = new Log(game);
 
+        // ---> Modify 2022/06/29 T.Okado
+		//selfPos = new SelfPosition(game);
+		//logSelfPos = new LogSelfPosition(game, selfPos);
+
 		// 自己位置推定インスタンスにgemeクラスのインスタンスを設定する
         Body.selfPos.setGameInstance(game);
 		// 自己位置推定ログのインスタンス生成
 		logSelfPos = new LogSelfPosition(game, Body.selfPos);
+		//<--- Modify 2022/06/29 T.Okado
+
+        //---> Modify 2022/06/29 T.Okado
+        //gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control);
         gameTask = new GameTask(countDownLatch, Body.measure, game, Body.control, Body.selfPos);
+        //<--- Modify 2022/06/29 T.Okado
+
         gameTask.setPriority(Thread.MAX_PRIORITY);
+
+        //---> Modify 2022/06/21 T.Okado
+        //logTask = new LogTask(log);
         logTask = new LogTask(log, logSelfPos);
+        //<--- Modify 2022/06/21 T.Okado
 
         logTask.setPriority(Thread.NORM_PRIORITY);
 
