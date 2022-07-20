@@ -57,24 +57,24 @@ public class ActivityAcquisitionColor extends Activity {
 		//画面が狭いので片方ずつ表示するようにコメントアウト
 
 		/** HSV表示 */
-		/*LCD.drawString("H(HSV)", 0, 3);
+		LCD.drawString("H(HSV)", 0, 3);
 		LCD.drawString(Float.toString(Body.measure.getHueHSV()), 11, 3);
 		LCD.drawString("S(HSV)", 0, 4);
 		LCD.drawString(Float.toString(Body.measure.getSaturationHSV()), 11, 4);
 		LCD.drawString("V(HSV)", 0, 5);
 		LCD.drawString(Float.toString(Body.measure.getValueHSV()), 11, 5);
 		LCD.drawString("C(HSV)", 0, 6);
-		LCD.drawString(String.valueOf(Body.measure.getColorHSV()), 11, 6);*/
+		LCD.drawString(String.valueOf(Body.measure.getColorHSV()), 11, 6);
 
 		/** HSL表示 */
-		LCD.drawString("H(HSL)", 0, 3);
-		LCD.drawString(Float.toString(Body.measure.getHueHSL()), 11, 3);
-		LCD.drawString("S(HSL)", 0, 4);
-		LCD.drawString(Float.toString(Body.measure.getSaturationHSL()), 11, 4);
-		LCD.drawString("L(HSL)", 0, 5);
-		LCD.drawString(Float.toString(Body.measure.getLightnessHSL()), 11, 5);
-		LCD.drawString("C(HSL)", 0, 6);
-		LCD.drawString(String.valueOf(Body.measure.getColorHSL()), 11, 6);
+		//		LCD.drawString("H(HSL)", 0, 3);
+		//		LCD.drawString(Float.toString(Body.measure.getHueHSL()), 11, 3);
+		//		LCD.drawString("S(HSL)", 0, 4);
+		//		LCD.drawString(Float.toString(Body.measure.getSaturationHSL()), 11, 4);
+		//		LCD.drawString("L(HSL)", 0, 5);
+		//		LCD.drawString(Float.toString(Body.measure.getLightnessHSL()), 11, 5);
+		//		LCD.drawString("C(HSL)", 0, 6);
+		//		LCD.drawString(String.valueOf(Body.measure.getColorHSL()), 11, 6);
 
 	}
 

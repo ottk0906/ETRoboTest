@@ -10,17 +10,36 @@ public class MeasureCourseHSL extends MeasureCourseHue {
 	/** sv（彩度:Saturation、明度:lightness）*/
 	private float saturation, lightness;
 
-	public MeasureCourseHSL() {
-		//仮設定
-		setHue(-3.0f);
-		saturation = lightness = -3.0f;
+	/** judgeColorHSLで使用 saturation = 0.5f以下の時 */
+	private final float SAT_050_BLACK_JUDGE_VALUE;
+	private final float SAT_050_WHITE_JUDGE_VALUE;
+
+	/** judgeColorHSLで使用 saturation = 1.0f以下の時 */
+	private final float SAT_100_BLACK_JUDGE_VALUE;
+	private final float SAT_100_WHITE_JUDGE_VALUE;
+
+	public MeasureCourseHSL(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
+			float borderBlueToRed) {
+		super(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+
+		float target = Body.measure.getTarget();
+		float white = Body.measure.getWhite();
+		SAT_100_BLACK_JUDGE_VALUE = target - (white - target) * 35.0f / 50f;
+		SAT_100_WHITE_JUDGE_VALUE = target + (white - target) * 35.0f / 50f;
+
+		/** (limitWhite - averageLimitWhiteBlack)が0.035fになるような係数 */
+		float correctionJudgeColorHSL = 0.35f / (SAT_100_WHITE_JUDGE_VALUE - target);
+
+		SAT_050_BLACK_JUDGE_VALUE = target - 0.3f * correctionJudgeColorHSL;
+		SAT_050_WHITE_JUDGE_VALUE = target + 0.3f * correctionJudgeColorHSL;
+
 	}
 
 	/**
 	 * 彩度を取得する
 	 * @return
 	 */
-	public float getSatuation() {
+	public float getSaturation() {
 		return saturation;
 	}
 
@@ -40,14 +59,33 @@ public class MeasureCourseHSL extends MeasureCourseHue {
 		judgeColor();
 	}
 
-
 	/**
 	 * 色をHSLで判定する
 	 * 色判定結果を設定する
 	 */
 	public void judgeColor() {
-		if (getJudgeColor() != null) {
-		setColor(getJudgeColor().judgeColorHSL(getHue(), saturation, lightness));
+		if (saturation <= 0.3f) {
+			if (lightness < Body.measure.getTarget()) {
+				setColor(Color.Black);
+			} else {
+				setColor(Color.White);
+			}
+		} else if (saturation <= 0.5f) {
+			if (lightness < SAT_050_BLACK_JUDGE_VALUE) {
+				setColor(Color.Black);
+			} else if (lightness > SAT_050_WHITE_JUDGE_VALUE) {
+				setColor(Color.White);
+			} else {
+				setColor(judgeColorHue(getHue()));
+			}
+		} else {
+			if (lightness < SAT_100_BLACK_JUDGE_VALUE) {
+				setColor(Color.Black);
+			} else if (lightness > SAT_100_WHITE_JUDGE_VALUE) {
+				setColor(Color.White);
+			} else {
+				setColor(judgeColorHue(getHue()));
+			}
 		}
 	}
 
@@ -130,19 +168,5 @@ public class MeasureCourseHSL extends MeasureCourseHue {
 		}
 		/*l設定部分*/
 		lightness = (max + min) / 2;
-	}
-
-	/**
-	 * 色を判定するクラスの生成
-	 * 色を判別するときの上限下限値を設定する
-	 * @param borderRedToYellow		赤色上限値、黄色下限値
-	 * @param borderYellowToGreen	黄色上限値、緑色下限値
-	 * @param borderGreenToBlue		緑色上限値、青色下限値
-	 * @param borderBlueToRed		青色上限値、赤色下限値
-	 */
-	void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
-			float borderBlueToRed) {
-		setJudgeColor(new JudgeColor(borderRedToYellow, borderYellowToGreen,
-				borderGreenToBlue, borderBlueToRed, Body.measure.getWhite(), Body.measure.getTarget()));
 	}
 }

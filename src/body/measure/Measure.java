@@ -1,5 +1,7 @@
 package body.measure;
 
+import body.measure.MeasureCourseHue.Color;
+
 /**
  * 計測クラス
  * デザインパターンのFacadeパターンを採用
@@ -14,10 +16,6 @@ public class Measure {
 	MeasureWheel measureWheel;
 	/** アーム制御 */
 	MeasureArm measureArm;
-	/** 路面計測HSV */
-	MeasureCourseHSV measureCourseHSV;
-	/** 路面計測HSL */
-	MeasureCourseHSL measureCourseHSL;
 
 	/**
 	 * コンストラクタ
@@ -73,15 +71,15 @@ public class Measure {
 	 * @param measureCourseHSV 路面計測HSV
 	 * @param measureCourseHSL 路面計測HSL
 	 */
-	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel,
-			MeasureArm measureArm, MeasureCourseHSV measureCourseHSV, MeasureCourseHSL measureCourseHSL) {
-		this.measureTouch = measureTouch;
-		this.measureCourse = measureCourse;
-		this.measureWheel = measureWheel;
-		this.measureArm = measureArm;
-		this.measureCourseHSV = measureCourseHSV;
-		this.measureCourseHSL = measureCourseHSL;
-	}
+	//	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel,
+	//			MeasureArm measureArm, MeasureCourseHSV measureCourseHSV, MeasureCourseHSL measureCourseHSL) {
+	//		this.measureTouch = measureTouch;
+	//		this.measureCourse = measureCourse;
+	//		this.measureWheel = measureWheel;
+	//		this.measureArm = measureArm;
+	//		this.measureCourseHSV = measureCourseHSV;
+	//		this.measureCourseHSL = measureCourseHSL;
+	//	}
 
 	/**
 	 * 更新する
@@ -91,8 +89,8 @@ public class Measure {
 		measureCourse.update();
 		measureWheel.update();
 		measureArm.update();
-		measureCourseHSV.update();
-		measureCourseHSL.update();
+		//		measureCourseHSV.update();
+		//		measureCourseHSL.update();
 	}
 
 	/**
@@ -236,8 +234,9 @@ public class Measure {
 	 */
 	public void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
 			float borderBlueToRed) {
-		measureCourseHSV.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
-		measureCourseHSL.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+		//		measureCourseHSV.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+		//		measureCourseHSL.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+		measureCourse.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 	}
 
 	/**
@@ -245,7 +244,8 @@ public class Measure {
 	 * @return hue
 	 */
 	public float getHueHSV() {
-		return measureCourseHSV.getHue();
+		//		return measureCourseHSV.getHue();
+		return measureCourse.getMeasureCourseHSV().getHue();
 	}
 
 	/**
@@ -253,7 +253,8 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSV() {
-		return measureCourseHSV.getSaturation();
+		//		return measureCourseHSV.getSaturation();
+		return measureCourse.getMeasureCourseHSV().getSaturation();
 	}
 
 	/**
@@ -261,7 +262,8 @@ public class Measure {
 	 * @return value
 	 */
 	public float getValueHSV() {
-		return measureCourseHSV.getValue();
+		//		return measureCourseHSV.getValue();
+		return measureCourse.getMeasureCourseHSV().getValue();
 	}
 
 	/**
@@ -269,7 +271,8 @@ public class Measure {
 	 * @return
 	 */
 	public Color getColorHSV() {
-		return measureCourseHSV.getColor();
+		//		return measureCourseHSV.getColor();
+		return measureCourse.getMeasureCourseHSV().getColor();
 	}
 
 	/**
@@ -277,7 +280,8 @@ public class Measure {
 	 * @return hue
 	 */
 	public float getHueHSL() {
-		return measureCourseHSL.getHue();
+		//		return measureCourseHSL.getHue();
+		return measureCourse.getMeasureCourseHSL().getHue();
 	}
 
 	/**
@@ -285,7 +289,8 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSL() {
-		return measureCourseHSL.getSatuation();
+		//		return measureCourseHSL.getSatuation();
+		return measureCourse.getMeasureCourseHSL().getSaturation();
 	}
 
 	/**
@@ -293,7 +298,8 @@ public class Measure {
 	 * @return
 	 */
 	public float getLightnessHSL() {
-		return measureCourseHSL.getLightness();
+		//		return measureCourseHSL.getLightness();
+		return measureCourse.getMeasureCourseHSL().getLightness();
 	}
 
 	/**
@@ -301,15 +307,16 @@ public class Measure {
 	 * @return
 	 */
 	public Color getColorHSL() {
-		return measureCourseHSL.getColor();
+		//		return measureCourseHSL.getColor();
+		return measureCourse.getMeasureCourseHSL().getColor();
 	}
 
 	/**
-	 * 色判定クラスがHSV,HSLクラスに存在しているか
-	 * @param 両方あるならfalse, 片方でもないならtrue
+	 * MeasureCourseHSV,MeasureCourseHSLクラスがMeasureCourseに存在しているか
+	 * @param 両方あるならtrue, 片方でもないならfalse
 	 */
-	public boolean isNullJudgeColor() {
-		return measureCourseHSV.getJudgeColor() == null || measureCourseHSL.getJudgeColor() == null ;
+	public boolean isNotNullHSVHSL() {
+		return measureCourse.isNotNullHSVHSL();
 	}
 
 }

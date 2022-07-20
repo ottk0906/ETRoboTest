@@ -10,13 +10,23 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 	/** sv（彩度:Saturation、明度:Value）*/
 	private float saturation, value;
 
+	/** judgeColorHSVで使用 白色の上限値*/
+	private final float LIMIT_SATURATION_HSV= 0.5f;//調査結果で決める仮設定
+	/** judgeColorHSVで使用 黒色の上限値 */
+	private final float LIMIT_VALUE_HSV;
+
 	/**
 	 * コンストラクタ
+	 * @param borderRedToYellow
+	 * @param borderYellowToGreen
+	 * @param borderGreenToBlue
+	 * @param borderBlueToRed
 	 */
-	public MeasureCourseHSV() {
-		//仮設定
-		setHue(-2.0f);
-		saturation = value = -2.0f;
+	public MeasureCourseHSV(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
+			float borderBlueToRed) {
+		super(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
+
+		this.LIMIT_VALUE_HSV = Body.measure.getTarget() * 3.0f / 5.0f;//調査結果で決める仮設定
 	}
 
 	/**
@@ -44,8 +54,12 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 	 * 色判定結果を設定する
 	 */
 	public void judgeColor() {
-		if (getJudgeColor() != null) {
-			setColor(getJudgeColor().judgeColorHSV(getHue(), saturation, value));
+		if (value <= LIMIT_VALUE_HSV) {
+			setColor(Color.Black);
+		} else if (saturation < LIMIT_SATURATION_HSV) {
+			setColor(Color.White);
+		} else {
+			setColor(judgeColorHue(getHue()));
 		}
 	}
 
@@ -119,19 +133,5 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 			saturation = (max - min) / max;
 		}
 		value = max;
-	}
-
-	/**
-	 * 色を判定するクラスの生成
-	 * 色を判別するときの上限下限値を設定する
-	 * @param borderRedToYellow		赤色上限値、黄色下限値
-	 * @param borderYellowToGreen	黄色上限値、緑色下限値
-	 * @param borderGreenToBlue		緑色上限値、青色下限値
-	 * @param borderBlueToRed		青色上限値、赤色下限値
-	 */
-	void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
-			float borderBlueToRed) {
-		setJudgeColor(new JudgeColor(borderRedToYellow, borderYellowToGreen,
-				borderGreenToBlue, borderBlueToRed));
 	}
 }

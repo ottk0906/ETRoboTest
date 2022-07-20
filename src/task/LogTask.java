@@ -1,5 +1,6 @@
 package task;
 
+import lejos.hardware.lcd.LCD;
 import log.Log;
 import log.LogSelfPosition;
 //<--- Add 2022/06/21 T.Okado
@@ -39,11 +40,15 @@ public class LogTask extends Thread {
      */
     @Override
     public void run() {
+    	try {
         log.run();
         //---> Add 2022/06/21 T.Okado
         //自己位置推定ログ出力処理を実行する
         logSelfPos.run();
         //<--- Add 2022/06/21 T.Okado
+    	}catch(Exception e) {
+    		LCD.drawString("LTE", 5, 7);
+    	}
     }
 
 }

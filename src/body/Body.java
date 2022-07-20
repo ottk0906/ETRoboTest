@@ -6,8 +6,6 @@ import body.control.ControlWheel;
 import body.measure.Measure;
 import body.measure.MeasureArm;
 import body.measure.MeasureCourse;
-import body.measure.MeasureCourseHSL;
-import body.measure.MeasureCourseHSV;
 import body.measure.MeasureTouch;
 import body.measure.MeasureWheel;
 import game.SelfPosition.SelfPosition;
@@ -29,7 +27,7 @@ public final class Body {
 	public static final Control control;
 	// 自己位置推定クラス
 	public static final SelfPosition selfPos;
-    /** ストップウォッチクラス	*/
+	/** ストップウォッチクラス	*/
 	public static final Stopwatch stopwatch;
 
 	/** 車輪の半径(mm) */
@@ -55,19 +53,17 @@ public final class Body {
 		MeasureCourse measureCourse = new MeasureCourse(colorSensor);
 		MeasureWheel measureWheel = new MeasureWheel(leftMotor, rightMotor);
 		MeasureArm measureArm = new MeasureArm(armMotor);
-		MeasureCourseHSV measureCourseHSV = new MeasureCourseHSV();
-        MeasureCourseHSL measureCourseHSL = new MeasureCourseHSL();
-		measure = new Measure(measureTouch, measureCourse, measureWheel, measureArm, measureCourseHSV, measureCourseHSL);
+		measure = new Measure(measureTouch, measureCourse, measureWheel, measureArm);
 		// 制御の初期化
 		ControlWheel controlWheel = new ControlWheel(leftMotor, rightMotor);
 		ControlArm controlArm = new ControlArm(armMotor);
 		control = new Control(controlWheel, controlArm);
 		// 自己位置推定クラス
 		selfPos = new SelfPosition();
-	    //ストップウォッチクラスを生成する
-	    stopwatch = new Stopwatch();
-	    //ストップウォッチのカウンタをリセットする
-	    stopwatch.reset();
+		//ストップウォッチクラスを生成する
+		stopwatch = new Stopwatch();
+		//ストップウォッチのカウンタをリセットする
+		stopwatch.reset();
 
 	}
 

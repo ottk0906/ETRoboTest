@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import body.measure.MeasureCourseHue.Color;
 import body.Body;
 import game.Game;
 import lejos.hardware.lcd.LCD;
@@ -33,8 +34,8 @@ public class Log {
 		this.game = game;
 		logList = new ArrayList<LogData>();
 		logRGBList = new ArrayList<LogRGBData>();
-        logHSVList = new ArrayList<LogHSVData>();
-        logHSLList = new ArrayList<LogHSLData>();
+		logHSVList = new ArrayList<LogHSVData>();
+		logHSLList = new ArrayList<LogHSLData>();
 
 	}
 
@@ -57,7 +58,7 @@ public class Log {
 		/*new LogData(game.toString(),Body.measure.getValue()));*/
 		//-- add 2022/07/06 Harada
 		addRGB();
-		if (Body.measure.isNullJudgeColor()) {
+		if (Body.measure.isNotNullHSVHSL()) {
 			addHSV();
 			addHSL();
 		}

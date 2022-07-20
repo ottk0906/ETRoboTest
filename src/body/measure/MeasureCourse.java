@@ -12,6 +12,9 @@ public class MeasureCourse {
 	private EV3ColorSensor colorSensor;
 	private SensorMode sensorMode;
 
+	private MeasureCourseHSL measureCourseHSL;
+	private MeasureCourseHSV measureCourseHSV;
+
 	/** 白明度 */
 	private float white;
 	/** 黒明度 */
@@ -48,6 +51,20 @@ public class MeasureCourse {
 
 		// RGBをHSVに変換する
 		convertRGBtoHSV(rgb);
+
+		//MeasureCourseHSV、MeasureCourseHSLが両方あるとき更新する
+		if (isNotNullHSVHSL()) {
+			measureCourseHSL.update();
+			measureCourseHSV.update();
+		}
+	}
+
+	public MeasureCourseHSV getMeasureCourseHSV() {
+		return measureCourseHSV;
+	}
+
+	public MeasureCourseHSL getMeasureCourseHSL() {
+		return measureCourseHSL;
 	}
 
 	/**
@@ -102,16 +119,16 @@ public class MeasureCourse {
 	 * 路面色相を取得する
 	 * @return　路面色相
 	 */
-	public float getHue(){
-	    return hsv[0];
+	public float getHue() {
+		return hsv[0];
 	}
 
 	/**
 	 * 路面彩度を取得する
 	 * @return　路面彩度
 	 */
-	public float getSaturation(){
-	    return hsv[1];
+	public float getSaturation() {
+		return hsv[1];
 	}
 
 	/**
@@ -123,12 +140,12 @@ public class MeasureCourse {
 	}
 
 	/**
-     * RGB値を取得する
-     * @return rgb (Red,Green,Blue)
-     */
-    float[] getRGB() {
-    	return rgb;
-    }
+	 * RGB値を取得する
+	 * @return rgb (Red,Green,Blue)
+	 */
+	float[] getRGB() {
+		return rgb;
+	}
 
 	/**
 	 * RGBをHSVに変換する
@@ -180,4 +197,19 @@ public class MeasureCourse {
 		hsv[2] = v;
 	}
 
+	public void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
+			float borderBlueToRed) {
+		measureCourseHSV = new MeasureCourseHSV(borderRedToYellow, borderYellowToGreen, borderGreenToBlue,
+				borderBlueToRed);
+		measureCourseHSL = new MeasureCourseHSL(borderRedToYellow, borderYellowToGreen, borderGreenToBlue,
+				borderBlueToRed);
+	}
+
+	/**
+	 * MeasureCourseHSV,MeasureCourseHSLクラスがMeasureCourseに存在しているか
+	 * @param 両方あるならtrue, 片方でもないならfalse
+	 */
+	public boolean isNotNullHSVHSL() {
+		return measureCourseHSV != null && measureCourseHSL != null;
+	}
 }

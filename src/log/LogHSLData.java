@@ -1,6 +1,6 @@
 package log;
 
-import body.measure.Color;
+import body.measure.MeasureCourseHue.Color;
 
 /**
  * HSVログデータクラス
