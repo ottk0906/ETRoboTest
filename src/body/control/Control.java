@@ -21,6 +21,10 @@ public class Control {
 	private float turn;
 	/** 目標角度 */
 	private float targetDegrees;
+	/** アーム回転角速度 */
+	private float armRotationSpeed;
+	/** アームモード */
+	private int armMode;
 
 	/**
 	 * コンストラクタ
@@ -53,7 +57,9 @@ public class Control {
 
 		controlWheel.setLeftRotationSpeed(leftRotationSpeed);
 		controlWheel.setRightRotationSpeed(rightRotationSpeed);
+		controlArm.setArmRotationSpeed(this.armRotationSpeed);
 		controlArm.setDegrees(this.targetDegrees);
+		controlArm.setArmMode(this.armMode);
 		controlWheel.run();
 		controlArm.run();
 	}
@@ -80,5 +86,21 @@ public class Control {
 	 */
 	public void setDegrees(float targetDegrees) {
 		this.targetDegrees = targetDegrees;
+	}
+
+	/**
+	 * アーム回転角速度を設定する
+	 * @param armRotationSpeed アーム回転角速度
+	 */
+	public void setArmRotationSpeed(float armRotationSpeed) {
+		this.armRotationSpeed = armRotationSpeed;
+	}
+
+	/**
+	 * アームのモードを設定する。0ならPIDでの制御、1なら単純な速度での制御
+	 * @param armMode アームのモード
+	 */
+	public void setArmMode(int armMode) {
+		this.armMode = armMode;
 	}
 }
