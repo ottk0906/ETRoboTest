@@ -21,12 +21,24 @@ public class ActivityRunPID extends ActivityRun {
 	/** 微分係数 */
 	private final float KD;
 
-	public ActivityRunPID(float forward, float turn, float KP, float KI, float KD) {
-		super(forward, turn);
+	/** ラインエッジ 1=左、-1=右 */
+	private final float lineEdge;
+
+	/**
+	 * コンストラクタ
+	 * @param forward 前進角速度
+	 * @param KP 比例係数
+	 * @param KI 積分係数
+	 * @param KD 微分係数
+	 * @param lineEdge ラインエッジ 1=左、-1=右
+	 */
+	public ActivityRunPID(float forward, float KP, float KI, float KD, float lineEdge) {
+		super(forward, 0.0f);
 
 		this.KP = KP;
 		this.KI = KI;
 		this.KD = KD;
+		this.lineEdge = lineEdge;
 	}
 
 	/**
@@ -38,21 +50,21 @@ public class ActivityRunPID extends ActivityRun {
 	public void doActivity() {
 		float p, i, d;
 		// 路面明度を取得する
-		float brightness = Body.measure.getValue();
+		float lightness = Body.measure.getLightnessHSL();
 
 		// 目標明度を取得する
 		float target = Body.measure.getTarget();
 
 		//操作量を計算する
 		kago[0] = kago[1];
-		kago[1] = target - brightness;
+		kago[1] = target - lightness;
 		integral += (kago[1] + kago[0]) / 2.0f * DELTA_T;
 
 		p = KP * kago[1];
 		i = KI * integral;
 		d = KD * (kago[1] - kago[0]) / DELTA_T;
 
-		turn = p + i + d;
+		turn = (p + i + d) * lineEdge;
 
 		// 速度を設定する
 		Body.control.setForward(forward);
