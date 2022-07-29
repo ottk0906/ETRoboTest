@@ -22,16 +22,11 @@ public class MeasureCourseHSL extends MeasureCourseHue {
 			float borderBlueToRed) {
 		super(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 
-		float target = Body.measure.getTarget();
-		float white = Body.measure.getWhite();
-		SAT_100_BLACK_JUDGE_VALUE = target - (white - target) * 35.0f / 50f;
-		SAT_100_WHITE_JUDGE_VALUE = target + (white - target) * 35.0f / 50f;
+		SAT_100_BLACK_JUDGE_VALUE = 0.2f;
+		SAT_100_WHITE_JUDGE_VALUE = 0.8f;
 
-		/** (limitWhite - averageLimitWhiteBlack)が0.035fになるような係数 */
-		float correctionJudgeColorHSL = 0.35f / (SAT_100_WHITE_JUDGE_VALUE - target);
-
-		SAT_050_BLACK_JUDGE_VALUE = target - 0.3f * correctionJudgeColorHSL;
-		SAT_050_WHITE_JUDGE_VALUE = target + 0.3f * correctionJudgeColorHSL;
+		SAT_050_BLACK_JUDGE_VALUE = 0.3f;
+		SAT_050_WHITE_JUDGE_VALUE = 0.7f;
 
 	}
 

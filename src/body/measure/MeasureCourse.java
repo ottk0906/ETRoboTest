@@ -15,10 +15,18 @@ public class MeasureCourse {
 	private MeasureCourseHSL measureCourseHSL;
 	private MeasureCourseHSV measureCourseHSV;
 
+	/** RGBの係数 */
+	private float kr, kg, kb;
+	private float lastRed, lastGreen, lastBlue;
+
 	/** 白明度 */
 	private float white;
+	/** 白RGB(赤、緑、青) */
+	private float whiteRGB[];
 	/** 黒明度 */
 	private float black;
+	/** 黒RGB(赤、緑、青) */
+	private float blackRGB[];
 	/** 目標明度 */
 	private float target;
 	/** 路面RGB（赤、緑、青） */
@@ -37,17 +45,23 @@ public class MeasureCourse {
 		hsv = new float[3];
 
 		// 仮キャリブレーション
-		white = 0.2f;
-		black = 0.0f;
-		target = (white + black) / 2.0f;
+		target = 0.5f;
+		kr = kg = kb = 1.0f;
+		lastRed = lastGreen = lastBlue = 0.0f;
+		whiteRGB = new float[3];
+		blackRGB = new float[3];
 	}
 
 	/**
 	 * 更新する
 	 */
 	public void update() {
+
 		// RGBを取得する
 		sensorMode.fetchSample(rgb, 0);
+
+		//RGBに補正をかける
+		ajustRGB();
 
 		// RGBをHSVに変換する
 		convertRGBtoHSV(rgb);
@@ -59,10 +73,47 @@ public class MeasureCourse {
 		}
 	}
 
+	/**
+	 * RGBの数値に補正をかける
+	 * その数値が1～0内なら今回の数値を、
+	 * 1～0外なら前回の1～0内の数値を使用する
+	 */
+	public void ajustRGB() {
+		//赤を1～0の数値に変換する
+		float tmp = (rgb[0] - blackRGB[0]) * kr;
+		if (tmp >= 0 && tmp <= 1) {
+			rgb[0] = lastRed = tmp;
+		} else {
+			rgb[0] = lastRed;
+		}
+		//緑を1～0の数値に変換する
+		tmp = (rgb[1] - blackRGB[1]) * kg;
+		if (tmp >= 0 && tmp <= 1) {
+			rgb[1] = lastGreen = tmp;
+		} else {
+			rgb[1] = lastGreen;
+		}
+		//青を1～0の数値に変換する
+		tmp = (rgb[2] - blackRGB[2]) * kb;
+		if (tmp >= 0 && tmp <= 1) {
+			rgb[2] = lastBlue = tmp;
+		} else {
+			rgb[2] = lastBlue;
+		}
+	}
+
+	/**
+	 * measureCourseHSVを取得する
+	 * @return
+	 */
 	public MeasureCourseHSV getMeasureCourseHSV() {
 		return measureCourseHSV;
 	}
 
+	/**
+	 * measureCourseHSLを取得する
+	 * @return
+	 */
 	public MeasureCourseHSL getMeasureCourseHSL() {
 		return measureCourseHSL;
 	}
@@ -84,6 +135,16 @@ public class MeasureCourse {
 	}
 
 	/**
+	 * 白RGBを設定する
+	 * @param red
+	 * @param green
+	 * @param blue
+	 */
+	public void setWhtieRGB(float[] maxRGB) {
+		this.whiteRGB = maxRGB;
+	}
+
+	/**
 	 * 黒明度を取得する
 	 * @return　黒明度
 	 */
@@ -97,6 +158,16 @@ public class MeasureCourse {
 	 */
 	public void setBlack(float black) {
 		this.black = black;
+	}
+
+	/**
+	 * 黒RGBを設定する
+	 * @param red
+	 * @param green
+	 * @param blue
+	 */
+	public void setBlackRGB(float[] minRGB) {
+		this.blackRGB = minRGB;
 	}
 
 	/**
@@ -211,5 +282,14 @@ public class MeasureCourse {
 	 */
 	public boolean isNotNullHSVHSL() {
 		return measureCourseHSV != null && measureCourseHSL != null;
+	}
+
+	/**
+	 * RGBの係数をキャリブレーション結果から設定する
+	 */
+	public void setKRKGKB() {
+		kr = 1.0f / (whiteRGB[0] - blackRGB[0]);
+		kg = 1.0f / (whiteRGB[1] - blackRGB[1]);
+		kb = 1.0f / (whiteRGB[2] - blackRGB[2]);
 	}
 }

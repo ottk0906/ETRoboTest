@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import body.measure.MeasureCourseHue.Color;
 import body.Body;
 import game.Game;
 import lejos.hardware.lcd.LCD;
@@ -87,8 +86,8 @@ public class Log {
 	 */
 	private void addHSL() {
 		logHSLList.add(new LogHSLData(game.getCount(),
-				Body.measure.getHueHSV(), Body.measure.getSaturationHSV(),
-				Body.measure.getValueHSV(), Body.measure.getColorHSL()));
+				Body.measure.getHueHSL(), Body.measure.getSaturationHSL(),
+				Body.measure.getLightnessHSL(), Body.measure.getColorHSL()));
 	}
 
 	/**

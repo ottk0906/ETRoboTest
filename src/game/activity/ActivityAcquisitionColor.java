@@ -2,6 +2,7 @@ package game.activity;
 
 import body.Body;
 import lejos.hardware.lcd.LCD;
+import task.Beep;
 
 /**
  * 色情報取得表示動作クラス
@@ -21,14 +22,15 @@ public class ActivityAcquisitionColor extends Activity {
 	 */
 	@Override
 	public void entryAction() {
+		Beep.ring();
 		try {
 			/** 以下を白黒のキャリブレーションを行ってから行うこと
 			 * 白黒キャリブレーションの変更時に以下を行うこと */
 			/** ここから */
-			float borderRtoY = 30.0f;
-			float borderYtoG = 90.0f;
-			float borderGtoB = 180.0f;
-			float borderBtoR = 300.0f;
+			float borderRtoY = 26.5f;
+			float borderYtoG = 85.5f;
+			float borderGtoB = 168.25f;
+			float borderBtoR = 289.25f;
 			Body.measure.setColorBorder(borderRtoY, borderYtoG, borderGtoB, borderBtoR);
 			/** ここまで */
 		} catch (Exception e) {
@@ -57,24 +59,24 @@ public class ActivityAcquisitionColor extends Activity {
 		//画面が狭いので片方ずつ表示するようにコメントアウト
 
 		/** HSV表示 */
-		LCD.drawString("H(HSV)", 0, 3);
-		LCD.drawString(Float.toString(Body.measure.getHueHSV()), 11, 3);
-		LCD.drawString("S(HSV)", 0, 4);
-		LCD.drawString(Float.toString(Body.measure.getSaturationHSV()), 11, 4);
-		LCD.drawString("V(HSV)", 0, 5);
-		LCD.drawString(Float.toString(Body.measure.getValueHSV()), 11, 5);
-		LCD.drawString("C(HSV)", 0, 6);
-		LCD.drawString(String.valueOf(Body.measure.getColorHSV()), 11, 6);
+		//		LCD.drawString("H(HSV)", 0, 3);
+		//		LCD.drawString(Float.toString(Body.measure.getHueHSV()), 11, 3);
+		//		LCD.drawString("S(HSV)", 0, 4);
+		//		LCD.drawString(Float.toString(Body.measure.getSaturationHSV()), 11, 4);
+		//		LCD.drawString("V(HSV)", 0, 5);
+		//		LCD.drawString(Float.toString(Body.measure.getValueHSV()), 11, 5);
+		//		LCD.drawString("C(HSV)", 0, 6);
+		//		LCD.drawString(String.valueOf(Body.measure.getColorHSV()), 11, 6);
 
 		/** HSL表示 */
-		//		LCD.drawString("H(HSL)", 0, 3);
-		//		LCD.drawString(Float.toString(Body.measure.getHueHSL()), 11, 3);
-		//		LCD.drawString("S(HSL)", 0, 4);
-		//		LCD.drawString(Float.toString(Body.measure.getSaturationHSL()), 11, 4);
-		//		LCD.drawString("L(HSL)", 0, 5);
-		//		LCD.drawString(Float.toString(Body.measure.getLightnessHSL()), 11, 5);
-		//		LCD.drawString("C(HSL)", 0, 6);
-		//		LCD.drawString(String.valueOf(Body.measure.getColorHSL()), 11, 6);
+		LCD.drawString("H(HSL)", 0, 3);
+		LCD.drawString(Float.toString(Body.measure.getHueHSL()), 11, 3);
+		LCD.drawString("S(HSL)", 0, 4);
+		LCD.drawString(Float.toString(Body.measure.getSaturationHSL()), 11, 4);
+		LCD.drawString("L(HSL)", 0, 5);
+		LCD.drawString(Float.toString(Body.measure.getLightnessHSL()), 11, 5);
+		LCD.drawString("C(HSL)", 0, 6);
+		LCD.drawString(String.valueOf(Body.measure.getColorHSL()), 11, 6);
 
 	}
 

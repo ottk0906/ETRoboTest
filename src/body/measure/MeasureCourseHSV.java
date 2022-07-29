@@ -11,7 +11,7 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 	private float saturation, value;
 
 	/** judgeColorHSVで使用 白色の上限値*/
-	private final float LIMIT_SATURATION_HSV= 0.5f;//調査結果で決める仮設定
+	private final float LIMIT_SATURATION_HSV = 0.25f;
 	/** judgeColorHSVで使用 黒色の上限値 */
 	private final float LIMIT_VALUE_HSV;
 
@@ -26,7 +26,7 @@ public class MeasureCourseHSV extends MeasureCourseHue {
 			float borderBlueToRed) {
 		super(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 
-		this.LIMIT_VALUE_HSV = Body.measure.getTarget() * 3.0f / 5.0f;//調査結果で決める仮設定
+		LIMIT_VALUE_HSV = 0.4f;
 	}
 
 	/**

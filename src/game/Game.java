@@ -9,6 +9,7 @@ import game.activity.ActivityCalibrationWhite;
 import game.activity.ActivityRun;
 import game.activity.ActivityRunPID;
 import game.activity.ActivityTurnTest;
+import game.guard.GuardCountGameTask;
 import game.guard.GuardDegrees;
 import game.guard.GuardDistanceStop;
 import game.guard.GuardTouch;
@@ -37,8 +38,12 @@ public class Game {
 	 * コンストラクタ
 	 */
 	public Game() {
-		StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityCalibrationWhite());
-		StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityCalibrationBlack());
+		StateCalibrationWhite.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+		StateCalibrationWhite.getInstance().add(new GuardCountGameTask(200), new ActivityRun(0, 0));
+		StateCalibrationWhite.getInstance().add(new GuardCountGameTask(300), new ActivityCalibrationWhite());
+		StateCalibrationBlack.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
+		StateCalibrationBlack.getInstance().add(new GuardCountGameTask(200), new ActivityRun(0, 0));
+		StateCalibrationBlack.getInstance().add(new GuardCountGameTask(300), new ActivityCalibrationBlack());
 		StateWaitStart.getInstance().add(new GuardTouch(), new ActivityRun(0, 0));
 
 		//---> Modify 2022/07/06 Harada

@@ -9,11 +9,13 @@ import body.Body;
  */
 public class ActivityCalibrationWhite extends Activity {
 
+	private float[] maxRGB;
+
 	/**
 	 * コンストラクタ
 	 */
 	public ActivityCalibrationWhite() {
-
+		this.maxRGB = new float[3];
 	}
 
 	/**
@@ -21,7 +23,16 @@ public class ActivityCalibrationWhite extends Activity {
 	 */
 	@Override
 	public void doActivity() {
-
+		float[] rgb = Body.measure.getRGB();
+		if (rgb[0] > maxRGB[0] && rgb[0] <= 1) {
+			maxRGB[0] = rgb[0];
+		}
+		if (rgb[1] > maxRGB[1] && rgb[1] <= 1) {
+			maxRGB[1] = rgb[1];
+		}
+		if (rgb[2] > maxRGB[2] && rgb[2] <= 1) {
+			maxRGB[2] = rgb[2];
+		}
 	}
 
 	/**
@@ -30,7 +41,8 @@ public class ActivityCalibrationWhite extends Activity {
 	 */
 	@Override
 	public void exitAction() {
-		Body.measure.setWhite(Body.measure.getValue());
+		Body.measure.setWhiteRGB(maxRGB);
+		//		Body.measure.setWhite(Body.measure.getValue());
 	}
 
 }

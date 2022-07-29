@@ -63,25 +63,6 @@ public class Measure {
 	}
 
 	/**
-	 * コンストラクタ
-	 * @param measureTouch タッチ計測
-	 * @param measureCourse 路面計測
-	 * @param measureWheel 車輪計測
-	 * @param measureArm アーム計測
-	 * @param measureCourseHSV 路面計測HSV
-	 * @param measureCourseHSL 路面計測HSL
-	 */
-	//	public Measure(MeasureTouch measureTouch, MeasureCourse measureCourse, MeasureWheel measureWheel,
-	//			MeasureArm measureArm, MeasureCourseHSV measureCourseHSV, MeasureCourseHSL measureCourseHSL) {
-	//		this.measureTouch = measureTouch;
-	//		this.measureCourse = measureCourse;
-	//		this.measureWheel = measureWheel;
-	//		this.measureArm = measureArm;
-	//		this.measureCourseHSV = measureCourseHSV;
-	//		this.measureCourseHSL = measureCourseHSL;
-	//	}
-
-	/**
 	 * 更新する
 	 */
 	public void update() {
@@ -89,8 +70,6 @@ public class Measure {
 		measureCourse.update();
 		measureWheel.update();
 		measureArm.update();
-		//		measureCourseHSV.update();
-		//		measureCourseHSL.update();
 	}
 
 	/**
@@ -234,8 +213,6 @@ public class Measure {
 	 */
 	public void setColorBorder(float borderRedToYellow, float borderYellowToGreen, float borderGreenToBlue,
 			float borderBlueToRed) {
-		//		measureCourseHSV.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
-		//		measureCourseHSL.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 		measureCourse.setColorBorder(borderRedToYellow, borderYellowToGreen, borderGreenToBlue, borderBlueToRed);
 	}
 
@@ -244,7 +221,6 @@ public class Measure {
 	 * @return hue
 	 */
 	public float getHueHSV() {
-		//		return measureCourseHSV.getHue();
 		return measureCourse.getMeasureCourseHSV().getHue();
 	}
 
@@ -253,7 +229,6 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSV() {
-		//		return measureCourseHSV.getSaturation();
 		return measureCourse.getMeasureCourseHSV().getSaturation();
 	}
 
@@ -262,7 +237,6 @@ public class Measure {
 	 * @return value
 	 */
 	public float getValueHSV() {
-		//		return measureCourseHSV.getValue();
 		return measureCourse.getMeasureCourseHSV().getValue();
 	}
 
@@ -271,7 +245,6 @@ public class Measure {
 	 * @return
 	 */
 	public Color getColorHSV() {
-		//		return measureCourseHSV.getColor();
 		return measureCourse.getMeasureCourseHSV().getColor();
 	}
 
@@ -280,7 +253,6 @@ public class Measure {
 	 * @return hue
 	 */
 	public float getHueHSL() {
-		//		return measureCourseHSL.getHue();
 		return measureCourse.getMeasureCourseHSL().getHue();
 	}
 
@@ -289,7 +261,6 @@ public class Measure {
 	 * @return saturation
 	 */
 	public float getSaturationHSL() {
-		//		return measureCourseHSL.getSatuation();
 		return measureCourse.getMeasureCourseHSL().getSaturation();
 	}
 
@@ -298,7 +269,6 @@ public class Measure {
 	 * @return
 	 */
 	public float getLightnessHSL() {
-		//		return measureCourseHSL.getLightness();
 		return measureCourse.getMeasureCourseHSL().getLightness();
 	}
 
@@ -307,7 +277,6 @@ public class Measure {
 	 * @return
 	 */
 	public Color getColorHSL() {
-		//		return measureCourseHSL.getColor();
 		return measureCourse.getMeasureCourseHSL().getColor();
 	}
 
@@ -319,4 +288,26 @@ public class Measure {
 		return measureCourse.isNotNullHSVHSL();
 	}
 
+	/**
+	 * 白RGBを設定する
+	 * @param maxRGB
+	 */
+	public void setWhiteRGB(float[] maxRGB) {
+		measureCourse.setWhtieRGB(maxRGB);
+	}
+
+	/**
+	 * 黒RGBを設定する
+	 * @param minRGB
+	 */
+	public void setBlackRGB(float[] minRGB) {
+		measureCourse.setBlackRGB(minRGB);
+	}
+
+	/**
+	 * RGBの係数をキャリブレーション結果から設定する
+	 */
+	public void setKRKGKB() {
+		measureCourse.setKRKGKB();
+	}
 }
